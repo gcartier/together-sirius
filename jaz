@@ -1,0 +1,130 @@
+#!/bin/sh
+
+REL="$(dirname "$0")"
+
+if [ -f "$REL/.jaz" ]; then
+	source "$REL/.jaz"
+fi
+
+JIR="$REL/jiri"
+JAZZ="$REL/jazz"
+JAZ="$JAZZ/jaz"
+
+UPDATE_DEPENDENCIES="true"
+
+bootstrap_init () {
+    cd "$REL"
+    git submodule init
+}
+
+bootstrap_update () {
+    cd "$REL"
+    git submodule update
+}
+
+bootstrap () {
+    (bootstrap_init) &&
+    (bootstrap_update)
+}
+
+bootstrap_dispatch () {
+    case "$1" in
+	"init" )
+	    bootstrap_init
+	    ;;
+	"update" )
+	    bootstrap_update
+	    ;;
+	"" )
+	    bootstrap
+	    ;;
+	* )
+	    echo "Unknown bootstrap option : $1"
+	    return 1
+	    ;;
+    esac
+}
+
+display_module_info () {
+    echo "$1"
+    if [ -d "$2" ]; then
+	cd "$2" &&
+	git log -1
+    fi
+}
+
+display_info () {
+    (display_module_info "Sirius" "$REL")
+    echo
+    (display_module_info "Jiri" "$JIR")
+    echo
+    (display_module_info "Jazz" "$JAZZ")
+}
+
+display_module_status () {
+    echo "$1"
+    if [ -d "$2" ]; then
+	cd "$2" &&
+	git status
+    fi
+}
+
+display_status () {
+    (display_module_status "Sirius" "$REL")
+    echo
+    (display_module_status "Jiri" "$JIR")
+    echo
+    (display_module_status "Jazz" "$JAZZ")
+}
+
+update_dependencies () {
+     cd "$REL"
+#    git submodule update
+}
+
+while getopts "l" OPTION; do
+    case $OPTION in
+	"l" )
+	    UPDATE_DEPENDENCIES="false"
+	    ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+case "$1" in
+    "clone" )
+        if [ "$2" = "jazz" ]; then
+            git clone https://github.com/jazzscheme/jazz
+            exit
+        fi
+        ;;
+
+	"bootstrap" )
+		bootstrap_dispatch $2
+		exit
+		;;
+
+	"status" )
+		display_status
+		exit
+		;;
+
+	"info" )
+		display_info
+		exit
+		;;
+esac
+
+if [ ! -f "$JAZ" ]; then
+	bootstrap
+elif $UPDATE_DEPENDENCIES; then
+    (update_dependencies)
+fi
+
+if [ ! -f "$JAZ" ]; then
+	echo "Unable to find jazz/jaz"
+	exit 1
+fi
+
+exec "$JAZ" "$@"
