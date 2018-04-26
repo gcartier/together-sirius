@@ -1,0 +1,10 @@
+/binaries
+/bin
+/build
+/cache
+/gambit
+/jazz
+/jiri
+/.jazzini
+.configuration
+.DS_Store
