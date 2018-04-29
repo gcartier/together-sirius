@@ -1,0 +1,19 @@
+(package sirius
+  
+  (root "src")
+  (products (sirius (title "Sirius")
+                    (product sirius.product)
+                    (update sirius.deploy
+                            sirius.product
+                            sirius.settings)
+                    (dependencies (cond
+                                    (mac
+                                      sirius-update)
+                                    (windows
+                                      sirius-setup
+                                      sirius-launch
+                                      sirius-install
+                                      sirius-uninstall))))
+            (sirius-deploy (alias deploy)
+                           (run sirius.deploy)))
+  (project ".project"))

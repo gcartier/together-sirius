@@ -1,0 +1,257 @@
+;;;==============
+;;;  JazzScheme
+;;;==============
+;;;
+;;;; Sirius Settings
+;;;
+;;;  The Initial Developer of the Original Code is Guillaume Cartier.
+;;;  Portions created by the Initial Developer are Copyright (C) 1996-2015
+;;;  the Initial Developer. All Rights Reserved.
+;;;
+;;;  Contributor(s):
+;;;
+;;;  See www.jazzscheme.org for details.
+
+
+(module sirius.settings jazz
+
+
+(import (jazz.io)
+        (jiri.connection)
+        (jiri.manager)
+        (jiri.section)
+        (jiri.settings)
+        (jiri.task))
+
+
+;;;
+;;;; Sirius
+;;;
+
+
+(definition sirius-host
+  "https://github.com/gcartier/")
+
+
+(definition sirius-environment-info
+  (cond-expand
+    (devel (list "Together" "devel"))
+    (test (list "Together" "test"))))
+
+(definition public sirius-environment-title
+  (first sirius-environment-info))
+
+(definition public sirius-environment-string
+  (second sirius-environment-info))
+
+
+(definition sirius-background
+  "background.png")
+
+
+;;;
+;;;; Together
+;;;
+
+
+(definition together-host
+  "https://github.com/gcartier/")
+
+
+(definition together-environment-info
+  (cond-expand
+    (devel (list "Devel" "devel"))
+    (test (list "Test" "test"))))
+
+(definition public together-environment-title
+  (first together-environment-info))
+
+(definition public together-environment-string
+  (second together-environment-info))
+
+
+;;;
+;;;; Jiri
+;;;
+
+
+(jiri-invite "Together")
+(jiri-title sirius-environment-title)
+(jiri-version "1.0 closed-alpha")
+(jiri-company "")
+(jiri-size (* 60 1024))
+(jiri-background (new-file {Directory Resources "lib" "sirius" "assets"} sirius-background))
+(jiri-connections? #f)
+(jiri-dark-overlay? #t)
+(jiri-game "application")
+(jiri-play "Enter")
+(jiri-play-ready "Together is ready to launch!")
+(jiri-offline? #t)
+(jiri-application "Together")
+(jiri-launcher "Together")
+(jiri-email "gucartier@gmail.com")
+(jiri-devel? #t)
+
+
+;;;
+;;;; Crashes
+;;;
+
+
+@wait
+(jiri-monitor-crashes
+  '(("Sirius" {Directory Home ".sirius" "crashes"} "http://sirius-amt.s3.amazonaws.com")
+    ("Together" {Directory Home ".together" "crashes"} "http://together-amt-prod-crashes.s3.amazonaws.com")))
+
+
+;;;
+;;;; Remote
+;;;
+
+
+(jiri-username "yownubeta")
+;; until mac modal dialog on credentials problems fixed
+(jiri-password "world123")
+(jiri-password-message "Please enter your closed-alpha password:")
+
+
+;;;
+;;;; Launch
+;;;
+
+
+(cond-expand
+  (windows
+    (jiri-launch-uninstall? #f))
+  (else))
+
+
+;;;
+;;;; Install
+;;;
+
+
+(cond-expand
+  (windows
+    (jiri-install-section
+      (new Jiri-Section
+        title: "sirius"
+        dir: "sirius"
+        part: .2
+        connection: (new Jiri-Connection
+                      title: "sirius"
+                      url: (string-append sirius-host "together-sirius-windows.git")
+                      branch: "master"
+                      dirname: "sirius-install")))
+    
+    (jiri-install-current "sirius/current"))
+  (else))
+
+
+;;;
+;;;; Update
+;;;
+
+
+(cond-expand
+  (mac
+    (jiri-update-section
+      (new Jiri-Section
+        title: "sirius"
+        dir: (cond-expand
+               (windows "sirius")
+               (mac "Contents/Apps"))
+        part: .2
+        connection: (new Jiri-Connection
+                      title: "sirius"
+                      url: (string-append sirius-host "together-sirius-mac.git")
+                      branch: "master"
+                      dirname: "Update.app")))
+    
+    (jiri-update-exe "Together"))
+  (else))
+
+
+;;;
+;;;; Transfer
+;;;
+
+
+(jiri-transfer-section
+  (new Jiri-Section
+    title: "sirius"
+    part: .1
+    tasks: (cond-expand
+             (mac
+               (list (new Jiri-Task part: 1.)))
+             (windows
+               (list (new Jiri-Task part: .8)
+                     (new Jiri-Task part: .2))))))
+
+
+;;;
+;;;; App
+;;;
+
+
+(jiri-app-section
+  (new Jiri-Section
+    title: "together"
+    dir: (cond-expand
+           (windows "together")
+           (mac "Contents/Apps"))
+    part: .4
+    connection: (new Jiri-Connection
+                  title: together-environment-title
+                  url: (string-append together-host (cond-expand
+                                                   (windows "together-windows.git")
+                                                   (mac "together-mac.git")))
+                  branch: "master"
+                  dirname: (cond-expand
+                             (windows together-environment-string)
+                             (mac "Together.app")))))
+
+
+;;;
+;;;; Data
+;;;
+
+
+(jiri-data-section
+  (new Jiri-Section
+    title: "world"
+    dir: (cond-expand
+           (windows "worlds")
+           (mac "Contents/Worlds"))
+    part: .3
+    connection: (new Jiri-Connection
+                  title: "World"
+                  url: (string-append together-host "together-world-universal.git")
+                  branch: "master"
+                  dirname: "together")))
+
+
+;;;
+;;;; Manager
+;;;
+
+
+(jiri-manager
+  (new Jiri-Manager
+    title: "Sirius"
+    sections: (list (cond-expand
+                      (windows (jiri-install-section))
+                      (mac (jiri-update-section)))
+                    (jiri-transfer-section)
+                    (jiri-app-section)
+                    (jiri-data-section))))
+
+
+;;;
+;;;; Debug
+;;;
+
+
+(jiri-process-name 'sirius)
+(jiri-settings-directory {Directory Home ".together-sirius"})
+(jiri-snapshots-directory {Directory Home ".together-sirius" "crashes"}))

@@ -1,0 +1,70 @@
+;;;==============
+;;;  JazzScheme
+;;;==============
+;;;
+;;;; Sirius-Update Product
+;;;
+;;;  The Initial Developer of the Original Code is Guillaume Cartier.
+;;;  Portions created by the Initial Developer are Copyright (C) 1996-2015
+;;;  the Initial Developer. All Rights Reserved.
+;;;
+;;;  Contributor(s):
+;;;
+;;;  See www.jazzscheme.org for details.
+
+
+(module sirius-update.product jazz
+
+
+(import (jazz.io)
+        (jazz.product)
+        (sirius.settings))
+
+
+;;;
+;;;; Image
+;;;
+
+
+(cond-expand
+  (mac
+    (definition (deploy-image)
+      (initialize-aliases)
+      (let ((src {Directory Home "Devel" "together" "install" "Together-Update.app"})
+            (dst {Directory :root "Volumes" "Together" "Together.app"}))
+        (let ((src-contents (new-directory src "Contents"))
+              (dst-contents (new-directory dst "Contents")))
+          (install-directory src-contents dst-contents
+            feedback: (lambda (action pathname)
+                        (build-feedback "; {a} {a}..." action (get-name pathname))))))))
+  (else
+    (definition (deploy-image)
+      )))
+
+
+;;;
+;;;; Deploy
+;;;
+
+
+(definition (deploy descriptor)
+  (initialize-aliases)
+  (let ((jazz (string-append kernel-install "jazz")))
+    (call-process
+      (list
+        path: jazz
+        arguments: `("-deploy"
+                     "sirius"))))
+  (let ((name (symbol->string (product-descriptor-name descriptor))))
+    (feedback "")
+    (feedback "Deploying {a}" name)
+    (deploy-image)))
+
+
+;;;
+;;;; Register
+;;;
+
+
+(register-product 'sirius-update
+  deploy: deploy))

@@ -1,0 +1,22 @@
+;;;==============
+;;;  JazzScheme
+;;;==============
+;;;
+;;;; Project
+;;;
+
+
+(data jazz.ide.data.project
+
+
+(import (jazz.project)
+        (jazz.editor.jazz))
+
+
+(form
+  (<Project>               name: sirius-uninstall description-file: {File :context ".package"}
+    (<*>                                          tag-reference: {File :context "sirius-uninstall.project"})
+    (<Project-Directory>                          directory: {Directory :context "src"}
+      (<Project-Directory>                        directory: {Directory :context "src" "sirius-uninstall"}
+        (<Jazz-File>       name: appl             source: {File :context "src" "sirius-uninstall" "appl.jazz"})
+        (<Jazz-File>       name: run              source: {File :context "src" "sirius-uninstall" "run.jazz"}))))))

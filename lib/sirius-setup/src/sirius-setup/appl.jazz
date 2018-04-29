@@ -1,0 +1,67 @@
+;;;==============
+;;;  JazzScheme
+;;;==============
+;;;
+;;;; Sirius-Setup Application
+;;;
+;;;  The Initial Developer of the Original Code is Guillaume Cartier.
+;;;  Portions created by the Initial Developer are Copyright (C) 1996-2015
+;;;  the Initial Developer. All Rights Reserved.
+;;;
+;;;  Contributor(s):
+;;;
+;;;  See www.jazzscheme.org for details.
+
+
+(module sirius-setup.appl jazz
+
+
+(import (jazz.io)
+        (jazz.markup)
+        (jazz.platform)
+        (jazz.ui)
+        (jazz.view)
+        (jazz.window)
+        (jazz.workspace)
+        (jiri.appl)
+        (jiri.settings)
+        (jiri.structure)
+        (jiri.view)
+        (jiri.work))
+
+
+;;;
+;;;; Application
+;;;
+
+
+(class Sirius-Setup-Application extends Jiri-Application
+  
+  
+  (method override (new-toplevel)
+    (new Sirius-Setup-Toplevel))
+  
+  
+  (method override (finish-process)
+    (nextmethod)
+    (set-title (current-frame) "Setup"))
+
+  
+  (method override (initialize-settings)
+    (register-resources-alias 'Sirius-Setup 'sirius-setup))
+  
+  
+  (method override (install-skins)
+    ))
+
+
+;;;
+;;;; Toplevel
+;;;
+
+
+(class Sirius-Setup-Toplevel extends Jiri-Toplevel
+
+
+  (form
+    (<install> caption-base: "Sirius"))))

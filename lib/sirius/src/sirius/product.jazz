@@ -1,0 +1,128 @@
+;;;==============
+;;;  JazzScheme
+;;;==============
+;;;
+;;;; Sirius Product
+;;;
+;;;  The Initial Developer of the Original Code is Guillaume Cartier.
+;;;  Portions created by the Initial Developer are Copyright (C) 1996-2015
+;;;  the Initial Developer. All Rights Reserved.
+;;;
+;;;  Contributor(s):
+;;;
+;;;  See www.jazzscheme.org for details.
+
+
+(module sirius.product jazz
+
+
+(import (jazz.io)
+        (jazz.product)
+        (sirius.settings))
+
+
+;;;
+;;;; Build
+;;;
+
+
+(definition (build descriptor (unit: unit #f) (force?: force? #f))
+  (define (resources-dir)
+    (cond-expand
+      (mac (new-directory {Directory Build} "together.app/Contents/Resources"))
+      (else {Directory Build})))
+  
+  (let ((project-dir {Directory Sirius})
+        (resources-dir (resources-dir)))
+    (define (install-filename path (src #f) (dst #f))
+      (let ((src (new-file project-dir (or src path)))
+            (dst (new-file resources-dir (or dst path))))
+        (install-file src dst
+          feedback: (lambda (action pathname)
+                      (build-feedback "; {a} {a}..." action (get-name pathname))))))
+    
+    (define (install-dirname path (src #f) (dst #f))
+      (let ((src (new-directory project-dir (or src path)))
+            (dst (new-directory resources-dir (or dst path))))
+        (install-directory src dst
+          feedback: (let ((first? #t))
+                      (lambda (action pathname)
+                        (when first?
+                          (build-feedback "; {a} {a}..." action (get-name pathname))
+                          (set! first? #f)))))))
+    
+    (define (copy-assets)
+      (install-dirname '("lib" "sirius" "assets")))
+    
+    (define (copy-curl)
+      (install-filename #f '("foreign" "curl.exe") '("curl.exe")))
+    
+    (build-product-descriptor descriptor unit: unit force?: force?)
+    (initialize-aliases)
+    (copy-assets)
+    (copy-curl)))
+
+
+;;;
+;;;; Install
+;;;
+
+
+(cond-expand
+  (mac
+    (definition install-dir
+      {Directory Home "Devel" "together" "install"})
+   
+    (definition installation-dirname
+      "Together-Update.app")
+    
+    
+    (definition (install descriptor)
+      (initialize-aliases)
+      (install-application descriptor install-dir
+        name: installation-dirname
+        bundle: "together"
+        source-access?: kernel-source-accessible?
+        platform?: #t
+        git?: #t
+        ignored-contents: '("Apps" "Worlds"))))
+  (else
+   (definition install-dir
+     {Directory Home "together" "install"})
+   
+   (definition installation-dirname
+     "together-sirius")
+   
+   
+   (definition (install descriptor)
+     (initialize-aliases)
+     (install-application descriptor install-dir
+       name: installation-dirname
+       executable?: #f
+       source-access?: kernel-source-accessible?
+       scriptable?: #f
+       platform?: #t
+       git?: #t
+       files: '("Launch.exe" "Install.exe" "Uninstall.exe" "curl.exe")))))
+
+
+;;;
+;;;; Deploy
+;;;
+
+
+(definition (deploy descriptor)
+  (initialize-aliases)
+  (deploy-application descriptor
+                      (new-directory install-dir installation-dirname)))
+
+
+;;;
+;;;; Register
+;;;
+
+
+(register-product 'sirius
+  build: build
+  install: install
+  deploy: deploy))

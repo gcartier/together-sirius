@@ -1,0 +1,14 @@
+(package sirius-setup
+  
+  (root "src")
+  (products (sirius-setup (title "Sirius Setup")
+                          (product sirius-setup.product)
+                          (run sirius-setup.run)
+                          (build (sirius-setup executable: "Setup" resources: "resources"))
+                          (update sirius-setup.appl
+                                  sirius-setup.product
+                                  sirius-setup.run)
+                          (dependencies jiri))
+            (sirius-setup-setup (alias setup)
+                                (run sirius-setup.setup)))
+  (project ".project"))

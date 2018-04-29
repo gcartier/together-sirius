@@ -1,0 +1,10 @@
+(package sirius-uninstall
+  
+  (root "src")
+  (products (sirius-uninstall (title "Sirius Uninstall")
+                              (run sirius-uninstall.run)
+                              (build (sirius-uninstall executable: "Uninstall" resources: "resources"))
+                              (update sirius-uninstall.appl
+                                      sirius-uninstall.run)
+                              (dependencies jiri)))
+  (project ".project"))

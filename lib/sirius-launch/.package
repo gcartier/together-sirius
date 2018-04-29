@@ -1,0 +1,9 @@
+(package sirius-launch
+  
+  (root "src")
+  (products (sirius-launch (title "Sirius Launch")
+                           (run sirius-launch.run)
+                           (build (sirius-launch executable: "Launch" resources: "resources"))
+                           (update sirius-launch.run)
+                           (dependencies jiri)))
+  (project ".project"))
