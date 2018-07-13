@@ -204,8 +204,8 @@
     connection: (new Jiri-Connection
                   title: together-environment-title
                   url: (string-append together-host (cond-expand
-                                                   (windows "together-windows.git")
-                                                   (mac "together-mac.git")))
+                                                      (windows "together-windows.git")
+                                                      (mac "together-mac.git")))
                   branch: "master"
                   dirname: (cond-expand
                              (windows together-environment-string)
