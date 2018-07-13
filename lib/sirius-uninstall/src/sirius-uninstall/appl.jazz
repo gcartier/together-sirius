@@ -36,16 +36,16 @@
 (class Sirius-Uninstall-Application extends Jiri-Application
   
   
-  (method override (new-toplevel)
+  (method override (new-toplevel self)
     (new Sirius-Uninstall-Toplevel))
   
   
-  (method override (finish-process)
-    (nextmethod)
+  (method override (finish-process self)
+    (nextmethod self)
     (set-title (current-frame) "Uninstall"))
 
   
-  (method override (initialize-settings)
+  (method override (initialize-settings self)
     (register-resources-alias 'Sirius-Uninstall 'sirius-uninstall)))
 
 

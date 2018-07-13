@@ -38,16 +38,16 @@
 (class Sirius-Install-Application extends Jiri-Application
   
   
-  (method override (new-toplevel)
+  (method override (new-toplevel self)
     (new Sirius-Install-Toplevel))
   
   
-  (method override (finish-process)
-    (nextmethod)
+  (method override (finish-process self)
+    (nextmethod self)
     (set-title (current-frame) "Install"))
 
   
-  (method override (initialize-settings)
+  (method override (initialize-settings self)
     (register-resources-alias 'Sirius-Install 'sirius-install)))
 
 

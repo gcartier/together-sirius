@@ -20,4 +20,5 @@
 
 (register-product-run 'sirius-launch
   (lambda (descriptor)
+    @convert
     (launch))))
