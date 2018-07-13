@@ -16,7 +16,8 @@
 (module sirius-setup.run jazz
 
 
-(import (sirius.settings)
+(import (jazz.process)
+        (sirius.settings)
         (sirius-setup.appl)
         (jiri.setup))
 
