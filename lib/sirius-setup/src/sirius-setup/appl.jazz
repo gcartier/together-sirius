@@ -38,20 +38,20 @@
 (class Sirius-Setup-Application extends Jiri-Application
   
   
-  (method override (new-toplevel)
+  (method override (new-toplevel self)
     (new Sirius-Setup-Toplevel))
   
   
-  (method override (finish-process)
-    (nextmethod)
+  (method override (finish-process self)
+    (nextmethod self)
     (set-title (current-frame) "Setup"))
 
   
-  (method override (initialize-settings)
+  (method override (initialize-settings self)
     (register-resources-alias 'Sirius-Setup 'sirius-setup))
   
   
-  (method override (install-skins)
+  (method override (install-skins self)
     ))
 
 
