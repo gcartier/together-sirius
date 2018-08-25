@@ -120,6 +120,7 @@
 ;;;
 
 
+@unified
 (cond-expand
   (windows
     (jiri-launch-uninstall? #f))
@@ -131,6 +132,7 @@
 ;;;
 
 
+@unified
 (cond-expand
   (windows
     (jiri-install-section
@@ -153,23 +155,26 @@
 ;;;
 
 
-(cond-expand
-  (mac
-    (jiri-update-section
-      (new Jiri-Section
-        title: "sirius"
-        dir: (cond-expand
-               (windows "sirius")
-               (mac "Contents/Apps"))
-        part: .2
-        connection: (new Jiri-Connection
-                      title: "sirius"
-                      url: (string-append sirius-host "together-sirius-mac.git")
-                      branch: "master"
-                      dirname: "Update.app")))
-    
-    (jiri-update-exe "Together"))
-  (else))
+(jiri-update-section
+  (new Jiri-Section
+    title: "sirius"
+    dir: (cond-expand
+           (mac "Contents/Apps")
+           (else "app"))
+    part: .2
+    connection: (new Jiri-Connection
+                  title: "sirius"
+                  url: (string-append sirius-host (cond-expand
+                                                    (mac "together-sirius-mac.git")
+                                                    (windows "together-sirius-windows.git")))
+                  branch: "master"
+                  dirname: (cond-expand
+                             (mac "Update.app")
+                             (else "update")))))
+
+(jiri-update-exe (cond-expand
+                   (mac "Together")
+                   (windows "Together.exe")))
 
 
 ;;;
@@ -181,12 +186,7 @@
   (new Jiri-Section
     title: "sirius"
     part: .1
-    tasks: (cond-expand
-             (mac
-               (list (new Jiri-Task part: 1.)))
-             (windows
-               (list (new Jiri-Task part: .8)
-                     (new Jiri-Task part: .2))))))
+    tasks: (list (new Jiri-Task part: 1.))))
 
 
 ;;;
@@ -198,18 +198,18 @@
   (new Jiri-Section
     title: "together"
     dir: (cond-expand
-           (windows "together")
-           (mac "Contents/Apps"))
+           (mac "Contents/Apps")
+           (else "app"))
     part: .4
     connection: (new Jiri-Connection
                   title: together-environment-title
                   url: (string-append together-host (cond-expand
-                                                      (windows "together-windows.git")
-                                                      (mac "together-mac.git")))
+                                                      (mac "together-mac.git")
+                                                      (windows "together-windows.git")))
                   branch: "master"
                   dirname: (cond-expand
-                             (windows together-environment-string)
-                             (mac "Together.app")))))
+                             (mac "Together.app")
+                             (else together-environment-string)))))
 
 
 ;;;
@@ -221,8 +221,8 @@
   (new Jiri-Section
     title: "world"
     dir: (cond-expand
-           (windows "worlds")
-           (mac "Contents/Worlds"))
+           (mac "Contents/Worlds")
+           (else "worlds"))
     part: .3
     connection: (new Jiri-Connection
                   title: "World"
@@ -239,9 +239,7 @@
 (jiri-manager
   (new Jiri-Manager
     title: "Sirius"
-    sections: (list (cond-expand
-                      (windows (jiri-install-section))
-                      (mac (jiri-update-section)))
+    sections: (list (jiri-update-section)
                     (jiri-transfer-section)
                     (jiri-app-section)
                     (jiri-data-section))))

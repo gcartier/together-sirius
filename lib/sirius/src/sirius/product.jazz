@@ -54,12 +54,14 @@
     (define (copy-assets)
       (install-dirname '("lib" "sirius" "assets")))
     
+    @curl
     (define (copy-curl)
       (install-filename #f '("foreign" "curl.exe") '("curl.exe")))
     
     (build-product-descriptor descriptor unit: unit force?: force?)
     (initialize-aliases)
     (copy-assets)
+    @curl
     (copy-curl)))
 
 
@@ -103,7 +105,7 @@
        scriptable?: #f
        platform?: #t
        git?: #t
-       files: '("Launch.exe" "Install.exe" "Uninstall.exe" "curl.exe")))))
+       files: '("Together.exe" @unified "Launch.exe" @unified "Install.exe" @unified "Uninstall.exe" @curl "curl.exe")))))
 
 
 ;;;

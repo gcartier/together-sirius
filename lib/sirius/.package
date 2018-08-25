@@ -7,8 +7,9 @@
                             sirius.product
                             sirius.settings)
                     (dependencies (cond
-                                    (mac
+                                    (else
                                       sirius-update)
+                                    @unified
                                     (windows
                                       sirius-setup
                                       sirius-launch
