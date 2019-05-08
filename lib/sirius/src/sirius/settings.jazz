@@ -35,7 +35,7 @@
 
 (definition sirius-environment-info
   (cond-expand
-    (devel (list "Together" "devel"))
+    (dev (list "Together" "devel"))
     (test (list "Together" "test"))))
 
 (definition public sirius-environment-title
@@ -60,7 +60,7 @@
 
 (definition together-environment-info
   (cond-expand
-    (devel (list "Devel" "devel"))
+    (dev (list "Devel" "devel"))
     (test (list "Test" "test"))))
 
 (definition public together-environment-title
@@ -142,7 +142,10 @@
         part: .2
         connection: (new Jiri-Connection
                       title: "sirius"
-                      url: (string-append sirius-host "together-sirius-windows.git")
+                      url: (string-append sirius-host (cond-expand
+                                                        ;; mostly to test the installer for now
+                                                        (dev "together-sirius-devel-windows.git")
+                                                        (test "together-sirius-windows.git")))
                       branch: "master"
                       dirname: "sirius-install")))
     
@@ -165,7 +168,10 @@
     connection: (new Jiri-Connection
                   title: "sirius"
                   url: (string-append sirius-host (cond-expand
-                                                    (mac "together-sirius-mac.git")
+                                                    (mac (cond-expand
+                                                           ;; mostly to test the installer for now
+                                                           (dev "together-sirius-devel-mac.git")
+                                                           (test "together-sirius-mac.git")))
                                                     (windows "together-sirius-windows.git")))
                   branch: "master"
                   dirname: (cond-expand

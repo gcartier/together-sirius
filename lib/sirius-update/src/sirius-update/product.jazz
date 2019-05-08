@@ -30,7 +30,9 @@
   (mac
     (definition (deploy-image)
       (initialize-aliases)
-      (let ((src {Directory Home "Devel" "together" "install" "Together-Update.app"})
+      (let ((src (cond-expand
+                   (dev {Directory Home "Devel" "together" "install" "Together-Devel-Update.app"})
+                   (test {Directory Home "Devel" "together" "install" "Together-Update.app"})))
             (dst {Directory :root "Volumes" "Together" "Together.app"}))
         (let ((src-contents (new-directory src "Contents"))
               (dst-contents (new-directory dst "Contents")))

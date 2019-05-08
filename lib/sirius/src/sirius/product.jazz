@@ -76,7 +76,9 @@
       {Directory Home "Devel" "together" "install"})
    
     (definition installation-dirname
-      "Together-Update.app")
+      (cond-expand
+        (dev "Together-Devel-Update.app")
+        (test "Together-Update.app")))
     
     
     (definition (install descriptor)
