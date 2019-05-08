@@ -14,6 +14,8 @@
 	<string>Together</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 	  <dict>
