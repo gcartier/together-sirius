@@ -16,7 +16,8 @@
 (module sirius-update.run jazz
 
 
-(import (jazz.process)
+(import (jazz.platform)
+        (jazz.process)
         (sirius.settings)
         (sirius-update.appl)
         (jiri.update))
@@ -24,4 +25,8 @@
 
 (register-product-run 'sirius-update
   (lambda (descriptor)
-    (boot-environment (new Sirius-Update-Application)))))
+    (if (directory-writable? kernel-bundle-install)
+        (boot-environment (new Sirius-Update-Application))
+      (system-message (format "Please drag & drop Together on the Applications icon")
+                      type: 'problem
+                      title: "Together")))))
