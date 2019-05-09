@@ -17,6 +17,7 @@
 
 
 (import (jazz.io)
+        (jazz.listener)
         (jazz.markup)
         (jazz.ui)
         (jazz.view)
@@ -42,7 +43,9 @@
   
   (method override (finish-process self)
     (nextmethod self)
-    (set-title (current-frame) "Update"))
+    (set-title (current-frame) "Update")
+    (start-socket-server)
+    (wait-socket-server))
 
   
   (method override (initialize-settings self)
