@@ -35,7 +35,8 @@
 
 (definition sirius-environment-info
   (cond-expand
-    (dev (list "Together" "devel"))
+    (local (list "Together" "local"))
+    (devel (list "Together" "devel"))
     (test (list "Together" "test"))))
 
 (definition public sirius-environment-title
@@ -60,7 +61,8 @@
 
 (definition together-environment-info
   (cond-expand
-    (dev (list "Devel" "devel"))
+    (local (list "Test" "local"))
+    (devel (list "Devel" "devel"))
     (test (list "Test" "test"))))
 
 (definition public together-environment-title
@@ -143,8 +145,8 @@
         connection: (new Jiri-Connection
                       title: "sirius"
                       url: (string-append sirius-host (cond-expand
-                                                        ;; mostly to test the installer for now
-                                                        (dev "together-sirius-devel-windows.git")
+                                                        (local "together-sirius-windows.git")
+                                                        (devel "together-sirius-devel-windows.git")
                                                         (test "together-sirius-windows.git")))
                       branch: "master"
                       dirname: "sirius-install")))
@@ -169,8 +171,8 @@
                   title: "sirius"
                   url: (string-append sirius-host (cond-expand
                                                     (mac (cond-expand
-                                                           ;; mostly to test the installer for now
-                                                           (dev "together-sirius-devel-mac.git")
+                                                           (local "together-sirius-mac.git")
+                                                           (devel "together-sirius-devel-mac.git")
                                                            (test "together-sirius-mac.git")))
                                                     (windows "together-sirius-windows.git")))
                   branch: "master"

@@ -77,19 +77,24 @@
    
     (definition installation-dirname
       (cond-expand
-        (dev "Together-Devel-Update.app")
+        (local #f)
+        (devel "Together-Devel-Update.app")
         (test "Together-Update.app")))
     
     
     (definition (install descriptor)
-      (initialize-aliases)
-      (install-application descriptor install-dir
-        name: installation-dirname
-        bundle: "together"
-        source-access?: kernel-source-accessible?
-        platform?: #t
-        git?: #t
-        ignored-contents: '("Apps" "Worlds"))))
+      (cond-expand
+        (local
+         (error "This is the local environment"))
+        (else
+         (initialize-aliases)
+         (install-application descriptor install-dir
+           name: installation-dirname
+           bundle: "together"
+           source-access?: kernel-source-accessible?
+           platform?: #t
+           git?: #t
+           ignored-contents: '("Apps" "Worlds"))))))
   (else
    (definition install-dir
      {Directory Home "together" "install"})
@@ -99,15 +104,19 @@
    
    
    (definition (install descriptor)
-     (initialize-aliases)
-     (install-application descriptor install-dir
-       name: installation-dirname
-       executable?: #f
-       source-access?: kernel-source-accessible?
-       scriptable?: #f
-       platform?: #t
-       git?: #t
-       files: '("Together.exe" @unified "Launch.exe" @unified "Install.exe" @unified "Uninstall.exe" @curl "curl.exe")))))
+     (cond-expand
+       (local
+        (error "This is the local environment"))
+       (else
+        (initialize-aliases)
+        (install-application descriptor install-dir
+          name: installation-dirname
+          executable?: #f
+          source-access?: kernel-source-accessible?
+          scriptable?: #f
+          platform?: #t
+          git?: #t
+          files: '("Together.exe" @unified "Launch.exe" @unified "Install.exe" @unified "Uninstall.exe" @curl "curl.exe")))))))
 
 
 ;;;

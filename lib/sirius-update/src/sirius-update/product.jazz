@@ -31,7 +31,8 @@
     (definition (deploy-image)
       (initialize-aliases)
       (let ((src (cond-expand
-                   (dev {Directory Home "Devel" "together" "install" "Together-Devel-Update.app"})
+                   (local (error "This is the local environment"))
+                   (devel {Directory Home "Devel" "together" "install" "Together-Devel-Update.app"})
                    (test {Directory Home "Devel" "together" "install" "Together-Update.app"})))
             (dst {Directory :root "Volumes" "Together" "Together.app"}))
         (let ((src-contents (new-directory src "Contents"))
