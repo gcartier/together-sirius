@@ -52,12 +52,6 @@
 
 (definition (deploy descriptor)
   (initialize-aliases)
-  (let ((jazz (string-append kernel-install "jazz")))
-    (call-process
-      (list
-        path: jazz
-        arguments: `("-deploy"
-                     "sirius"))))
   (let ((name (symbol->string (product-descriptor-name descriptor))))
     (feedback "")
     (feedback "Deploying {a}" name)
