@@ -78,8 +78,9 @@
     (definition installation-dirname
       (cond-expand
         (local #f)
-        (devel "Together-Devel-Update.app")
-        (test "Together-Update.app")))
+        (devel "together-update-devel.app")
+        (test "together-update-test.app")
+        (triage "together-update-triage.app")))
     
     
     (definition (install descriptor)

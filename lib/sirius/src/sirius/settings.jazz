@@ -35,9 +35,10 @@
 
 (definition sirius-environment-info
   (cond-expand
-    (local (list "Together" "local"))
-    (devel (list "Together" "devel"))
-    (test (list "Together" "test"))))
+    (local  (list "Together" "local"))
+    (devel  (list "Together" "devel"))
+    (test   (list "Together" "test"))
+    (triage (list "Together" "triage"))))
 
 (definition public sirius-environment-title
   (first sirius-environment-info))
@@ -61,9 +62,10 @@
 
 (definition together-environment-info
   (cond-expand
-    (local (list "Test" "local"))
-    (devel (list "Devel" "devel"))
-    (test (list "Test" "test"))))
+    (local  (list "Test"   "local"))
+    (devel  (list "Devel"  "devel"))
+    (test   (list "Test"   "test"))
+    (triage (list "Triage" "triage"))))
 
 (definition public together-environment-title
   (first together-environment-info))
@@ -147,7 +149,8 @@
                       url: (string-append sirius-host (cond-expand
                                                         (local "together-sirius-windows.git")
                                                         (devel "together-sirius-devel-windows.git")
-                                                        (test "together-sirius-windows.git")))
+                                                        (test "together-sirius-test-windows.git")
+                                                        (triage "together-sirius-triage-windows.git")))
                       branch: "master"
                       dirname: "sirius-install")))
     
@@ -173,7 +176,8 @@
                                                     (mac (cond-expand
                                                            (local "together-sirius-mac.git")
                                                            (devel "together-sirius-devel-mac.git")
-                                                           (test "together-sirius-mac.git")))
+                                                           (test "together-sirius-test-mac.git")
+                                                           (triage "together-sirius-triage-mac.git")))
                                                     (windows "together-sirius-windows.git")))
                   branch: "master"
                   dirname: (cond-expand
@@ -212,8 +216,10 @@
     connection: (new Jiri-Connection
                   title: together-environment-title
                   url: (string-append together-host (cond-expand
-                                                      (mac "together-mac.git")
-                                                      (windows "together-windows.git")))
+                                                      (mac (cond-expand
+                                                             (triage "together-triage-mac.git")
+                                                             (else "together-test-mac.git")))
+                                                      (windows "together-test-windows.git")))
                   branch: "master"
                   dirname: (cond-expand
                              (mac "Together.app")
