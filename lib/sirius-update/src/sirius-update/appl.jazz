@@ -23,9 +23,11 @@
         (jazz.view)
         (jazz.workspace)
         (jiri.appl)
+        (jiri.monitor)
         (jiri.settings)
         (jiri.structure)
         (jiri.view)
+        (jiri.window)
         (jiri.work))
 
 
@@ -49,7 +51,14 @@
 
   
   (method override (initialize-settings self)
-    (register-resources-alias 'Sirius-Update 'sirius-update)))
+    (register-resources-alias 'Sirius-Update 'sirius-update))
+  
+  
+  (method override (quit-process self (status 0))
+    ;; quicky to completely disable quit
+    (if send-crash-reports-thread
+        (signal-cancel)
+      (quit-callback))))
 
 
 ;;;

@@ -102,10 +102,21 @@
 ;;;
 
 
-@wait
 (jiri-monitor-crashes
-  '(("Sirius" {Directory Home ".sirius" "crashes"} "http://sirius-amt.s3.amazonaws.com")
-    ("Together" {Directory Home ".together" "crashes"} "http://together-amt-prod-crashes.s3.amazonaws.com")))
+  (list (list "Sirius"
+              {Directory Home ".together-sirius" "crashes"}
+              "http://logs.togethersphere.com/sirius")
+        (list "Together"
+              (cond-expand
+                (local  {Directory Home ".together" "devel" "1.0.0" "work" "crashes"})
+                (devel  {Directory Home ".together" "devel" "1.0.0" "work" "crashes"})
+                (test   {Directory Home ".together" "test" "1.0.0" "work" "crashes"})
+                (triage {Directory Home ".together" "triage" "1.0.0" "work" "crashes"}))
+              (cond-expand
+                (local  "http://logs.togethersphere.com/devel")
+                (devel  "http://logs.togethersphere.com/devel")
+                (test   "http://logs.togethersphere.com/test")
+                (triage "http://logs.togethersphere.com/triage")))))
 
 
 ;;;
@@ -174,7 +185,7 @@
                   title: "sirius"
                   url: (string-append sirius-host (cond-expand
                                                     (mac (cond-expand
-                                                           (local "together-sirius-mac.git")
+                                                           (local "together-sirius-test-mac.git")
                                                            (devel "together-sirius-devel-mac.git")
                                                            (test "together-sirius-test-mac.git")
                                                            (triage "together-sirius-triage-mac.git")))
