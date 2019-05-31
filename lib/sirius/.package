@@ -7,14 +7,14 @@
                             sirius.product
                             sirius.settings)
                     (dependencies (cond
-                                    (else
-                                      sirius-update)
-                                    @unified
+                                    #; ;; universal
                                     (windows
                                       sirius-setup
                                       sirius-launch
                                       sirius-install
-                                      sirius-uninstall))))
+                                      sirius-uninstall)
+                                    (else
+                                      sirius-update))))
             (sirius-deploy (alias deploy)
                            (run sirius.deploy)))
   (project ".project"))

@@ -135,7 +135,7 @@
 ;;;
 
 
-@unified
+@universal
 (cond-expand
   (windows
     (jiri-launch-uninstall? #f))
@@ -147,7 +147,7 @@
 ;;;
 
 
-@unified
+@universal
 (cond-expand
   (windows
     (jiri-install-section
