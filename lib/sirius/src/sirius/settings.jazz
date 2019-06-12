@@ -189,7 +189,7 @@
                                                            (devel "together-sirius-devel-mac.git")
                                                            (test "together-sirius-test-mac.git")
                                                            (triage "together-sirius-triage-mac.git")))
-                                                    (windows "together-sirius-windows.git")))
+                                                    (windows "together-sirius-test-windows.git")))
                   branch: "master"
                   dirname: (cond-expand
                              (mac "Update.app")
@@ -234,7 +234,7 @@
                   branch: "master"
                   dirname: (cond-expand
                              (mac "Together.app")
-                             (else together-environment-string)))))
+                             (else "together")))))
 
 
 ;;;
