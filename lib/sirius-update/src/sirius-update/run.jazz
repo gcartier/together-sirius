@@ -25,7 +25,9 @@
 
 (register-product-run 'sirius-update
   (lambda (descriptor)
-    (if (directory-writable? kernel-bundle-install)
+    (if (cond-expand
+          (mac (directory-writable? kernel-bundle-install))
+          (else #t))
         (boot-environment (new Sirius-Update-Application))
       (system-message (format "Please drag & drop Together on the Applications icon")
                       type: 'problem
