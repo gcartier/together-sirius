@@ -46,8 +46,7 @@
   (method override (finish-process self)
     (nextmethod self)
     (set-title (current-frame) "Update")
-    (start-socket-server)
-    (wait-socket-server))
+    (start-socket-server))
 
   
   (method override (initialize-settings self)
