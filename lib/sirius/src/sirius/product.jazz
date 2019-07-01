@@ -100,7 +100,10 @@
      {Directory Home "together" "install"})
    
    (definition installation-dirname
-     "together-sirius")
+     (cond-expand
+       (test "together-sirius-test")
+       (triage "together-sirius-triage")
+       (prod "together-sirius-prod")))
    
    
    (definition (install descriptor)
