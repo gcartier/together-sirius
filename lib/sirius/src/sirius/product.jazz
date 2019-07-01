@@ -78,7 +78,8 @@
         (local #f)
         (devel "together-update-devel.app")
         (test "together-update-test.app")
-        (triage "together-update-triage.app")))
+        (triage "together-update-triage.app")
+        (prod "together-update-prod.app")))
     
     
     (definition (install descriptor)
