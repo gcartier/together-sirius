@@ -195,7 +195,10 @@
                                                            (test "together-sirius-test-mac.git")
                                                            (triage "together-sirius-triage-mac.git")
                                                            (prod "together-sirius-prod-mac.git")))
-                                                    (windows "together-sirius-windows.git")))
+                                                    (windows (cond-expand
+                                                               (test "together-sirius-test-windows.git")
+                                                               (triage "together-sirius-triage-windows.git")
+                                                               (prod "together-sirius-prod-windows.git")))))
                   branch: "master"
                   dirname: (cond-expand
                              (mac "Update.app")
