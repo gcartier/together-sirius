@@ -82,6 +82,8 @@
 
 
 (jiri-invite (cond-expand
+               (local "Together Local")
+               (devel "Together Devel")
                (test "Together Test")
                (triage "Together Triage")
                (prod "Together")))
@@ -240,6 +242,7 @@
                   title: together-environment-title
                   url: (string-append together-host (cond-expand
                                                       (mac (cond-expand
+                                                             (local "together-test-mac.git")
                                                              (test "together-test-mac.git")
                                                              (triage "together-triage-mac.git")
                                                              (prod "together-prod-mac.git")))
