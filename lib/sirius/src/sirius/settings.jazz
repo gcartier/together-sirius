@@ -81,7 +81,10 @@
 ;;;
 
 
-(jiri-invite "Together")
+(jiri-invite (cond-expand
+               (test "Together Test")
+               (triage "Together Triage")
+               (prod "Together")))
 (jiri-title sirius-environment-title)
 (jiri-version "1.0 closed-alpha")
 (jiri-company "")
