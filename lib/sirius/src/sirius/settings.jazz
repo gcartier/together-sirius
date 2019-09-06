@@ -97,7 +97,6 @@
 (jiri-game "application")
 (jiri-play "Enter")
 (jiri-play-ready "Together is ready to launch!")
-(jiri-offline? #t)
 (jiri-application "Together")
 (jiri-launcher "Together")
 (jiri-email "gucartier@gmail.com")
