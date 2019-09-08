@@ -114,11 +114,20 @@
               "http://logs.togethersphere.com/sirius")
         (list "Together"
               (cond-expand
-                (local  {Directory Home ".together" "devel" "1.0.0" "work" "crashes"})
-                (devel  {Directory Home ".together" "devel" "1.0.0" "work" "crashes"})
-                (test   {Directory Home ".together" "test" "1.0.0" "work" "crashes"})
-                (triage {Directory Home ".together" "triage" "1.0.0" "work" "crashes"})
-                (prod   {Directory Home ".together" "prod" "1.0.0" "work" "crashes"}))
+                (windows
+                 (cond-expand
+                   (local  "app/.together/devel/1.0.0/work/crashes")
+                   (devel  "app/.together/devel/1.0.0/work/crashes")
+                   (test   "app/.together/test/1.0.0/work/crashes")
+                   (triage "app/.together/triage/1.0.0/work/crashes")
+                   (prod   "app/.together/prod/1.0.0/work/crashes")))
+                (else
+                 (cond-expand
+                   (local  {Directory Home ".together" "devel" "1.0.0" "work" "crashes"})
+                   (devel  {Directory Home ".together" "devel" "1.0.0" "work" "crashes"})
+                   (test   {Directory Home ".together" "test" "1.0.0" "work" "crashes"})
+                   (triage {Directory Home ".together" "triage" "1.0.0" "work" "crashes"})
+                   (prod   {Directory Home ".together" "prod" "1.0.0" "work" "crashes"}))))
               (cond-expand
                 (local  "http://logs.togethersphere.com/devel")
                 (devel  "http://logs.togethersphere.com/devel")
