@@ -110,7 +110,11 @@
 
 (jiri-monitor-crashes
   (list (list "Sirius"
-              {Directory Home ".together-sirius" "crashes"}
+              (cond-expand
+                (windows
+                 "../.together-sirius/crashes")
+                (else
+                 {Directory Home ".together-sirius" "crashes"}))
               "http://logs.togethersphere.com/sirius")
         (list "Together"
               (cond-expand
