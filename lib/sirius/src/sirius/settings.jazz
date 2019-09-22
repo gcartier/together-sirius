@@ -39,6 +39,7 @@
     (devel  (list "Together" "devel"))
     (test   (list "Together" "test"))
     (triage (list "Together" "triage"))
+    (stage  (list "Together" "stage"))
     (prod   (list "Together" "prod"))))
 
 (definition public sirius-environment-title
@@ -67,6 +68,7 @@
     (devel  (list "Devel"  "devel"))
     (test   (list "Test"   "test"))
     (triage (list "Triage" "triage"))
+    (stage  (list "Stage"  "stage"))
     (prod   (list "Prod"   "prod"))))
 
 (definition public together-environment-title
@@ -86,6 +88,7 @@
                (devel "Together Devel")
                (test "Together Test")
                (triage "Together Triage")
+               (stage "Together Stage")
                (prod "Together")))
 (jiri-title sirius-environment-title)
 (jiri-version "1.0 closed-alpha")
@@ -124,6 +127,7 @@
                    (devel  "app/.together/devel/1.0.0/work/crashes")
                    (test   "app/.together/test/1.0.0/work/crashes")
                    (triage "app/.together/triage/1.0.0/work/crashes")
+                   (stage  "app/.together/stage/1.0.0/work/crashes")
                    (prod   "app/.together/prod/1.0.0/work/crashes")))
                 (else
                  (cond-expand
@@ -131,12 +135,14 @@
                    (devel  {Directory Home ".together" "devel" "1.0.0" "work" "crashes"})
                    (test   {Directory Home ".together" "test" "1.0.0" "work" "crashes"})
                    (triage {Directory Home ".together" "triage" "1.0.0" "work" "crashes"})
+                   (stage  {Directory Home ".together" "stage" "1.0.0" "work" "crashes"})
                    (prod   {Directory Home ".together" "prod" "1.0.0" "work" "crashes"}))))
               (cond-expand
                 (local  "http://logs.togethersphere.com/devel")
                 (devel  "http://logs.togethersphere.com/devel")
                 (test   "http://logs.togethersphere.com/test")
                 (triage "http://logs.togethersphere.com/triage")
+                (stage  "http://logs.togethersphere.com/stage")
                 (prod   "http://logs.togethersphere.com/prod")))))
 
 
@@ -183,6 +189,7 @@
                                                         (devel "together-sirius-devel-windows.git")
                                                         (test "together-sirius-test-windows.git")
                                                         (triage "together-sirius-triage-windows.git")
+                                                        (stage "together-sirius-stage-windows.git")
                                                         (prod "together-sirius-prod-windows.git")))
                       branch: "master"
                       dirname: "sirius-install")))
@@ -211,10 +218,12 @@
                                                            (devel "together-sirius-devel-mac.git")
                                                            (test "together-sirius-test-mac.git")
                                                            (triage "together-sirius-triage-mac.git")
+                                                           (stage "together-sirius-stage-mac.git")
                                                            (prod "together-sirius-prod-mac.git")))
                                                     (windows (cond-expand
                                                                (test "together-sirius-test-windows.git")
                                                                (triage "together-sirius-triage-windows.git")
+                                                               (stage "together-sirius-stage-windows.git")
                                                                (prod "together-sirius-prod-windows.git")))))
                   branch: "master"
                   dirname: (cond-expand
@@ -257,10 +266,12 @@
                                                              (local "together-test-mac.git")
                                                              (test "together-test-mac.git")
                                                              (triage "together-triage-mac.git")
+                                                             (stage "together-stage-mac.git")
                                                              (prod "together-prod-mac.git")))
                                                       (windows (cond-expand
                                                                  (test "together-test-windows.git")
                                                                  (triage "together-triage-windows.git")
+                                                                 (stage "together-stage-windows.git")
                                                                  (prod "together-prod-windows.git")))))
                   branch: "master"
                   dirname: (cond-expand
