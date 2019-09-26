@@ -103,7 +103,6 @@
 (jiri-application "Together")
 (jiri-launcher "Together")
 (jiri-email "gucartier@gmail.com")
-(jiri-devel? #t)
 
 
 ;;;
