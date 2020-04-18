@@ -301,13 +301,9 @@
     part: .3
     connection: (new Jiri-Connection
                   title: "World"
-                  url: (string-append together-host (cond-expand
-                                                      (test "yownu-world-universal.git")
-                                                      (else "together-world-universal.git")))
+                  url: (string-append together-host "together-world-universal.git")
                   branch: "master"
-                  dirname: (cond-expand
-                             (test "yownu")
-                             (else "together")))))
+                  dirname: "together")))
 
 
 ;;;
