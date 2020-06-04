@@ -298,12 +298,28 @@
     dir: (cond-expand
            (mac "Contents/Worlds")
            (else "worlds"))
-    part: .3
+    part: .1
     connection: (new Jiri-Connection
                   title: "World"
                   url: (string-append together-host "together-world-universal.git")
                   branch: "master"
                   dirname: "together")))
+
+
+;;;
+;;;; Splash
+;;;
+
+
+(jiri-splash-section
+  (new Jiri-Section
+    title: "world"
+    part: .2
+    tasks: (list (new Jiri-Task part: 1.))))
+
+(jiri-splash-title "Together is up to date!")
+
+(jiri-splash-end 785)
 
 
 ;;;
@@ -317,7 +333,8 @@
     sections: (list (jiri-update-section)
                     (jiri-transfer-section)
                     (jiri-app-section)
-                    (jiri-data-section))))
+                    (jiri-data-section)
+                    (jiri-splash-section))))
 
 
 ;;;
