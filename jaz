@@ -12,6 +12,15 @@ JAZ="$JAZZ/jaz"
 
 UPDATE_DEPENDENCIES="true"
 
+REPOCOLOR='\033[1;34m'
+NOCOLOR='\033[0m'
+
+case $OSTYPE in
+    "msys" )
+        alias git='"/c/Program Files/Git/bin/git"'
+	     ;;
+esac
+
 bootstrap_init () {
     cd "$REL"
     git submodule init
@@ -45,36 +54,48 @@ bootstrap_dispatch () {
     esac
 }
 
-display_module_info () {
-    echo "$1"
-    if [ -d "$2" ]; then
-	cd "$2" &&
-	git log -1
-    fi
+feedback() {
+    case $OSTYPE in
+        "msys" )
+            echo -e "$1"
+	         ;;
+
+        * )
+            echo "$1"
+            ;;
+    esac
 }
 
 display_info () {
-    (display_module_info "Sirius" "$REL")
-    echo
-    (display_module_info "Jiri" "$JIR")
-    echo
-    (display_module_info "Jazz" "$JAZZ")
-}
-
-display_module_status () {
-    echo "$1"
+    feedback "${REPOCOLOR}$1${NOCOLOR}"
     if [ -d "$2" ]; then
-	cd "$2" &&
-	git status
+	     cd "$2" &&
+	     git log -1
     fi
 }
 
+display_all_info () {
+    (display_info "Sirius" "$REL")
+    echo
+    (display_info "Jiri" "$JIR")
+    echo
+    (display_info "Jazz" "$JAZZ")
+}
+
 display_status () {
-    (display_module_status "Sirius" "$REL")
+    feedback "${REPOCOLOR}$1${NOCOLOR}"
+    if [ -d "$2" ]; then
+	     cd "$2" &&
+	     git status
+    fi
+}
+
+display_all_status () {
+    (display_status "Sirius" "$REL")
     echo
-    (display_module_status "Jiri" "$JIR")
+    (display_status "Jiri" "$JIR")
     echo
-    (display_module_status "Jazz" "$JAZZ")
+    (display_status "Jazz" "$JAZZ")
 }
 
 update_dependencies () {
@@ -106,12 +127,12 @@ case "$1" in
 		;;
 
 	"status" )
-		display_status
+		display_all_status
 		exit
 		;;
 
 	"info" )
-		display_info
+		display_all_info
 		exit
 		;;
 esac
