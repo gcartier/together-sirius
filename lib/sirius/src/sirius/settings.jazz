@@ -319,7 +319,7 @@
 
 (jiri-splash-uptodate "Together is up to date")
 
-(jiri-splash-updated "Together updated to the lastest version")
+(jiri-splash-updated "Together was updated to the latest version")
 
 (jiri-splash-end 785)
 
