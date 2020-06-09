@@ -317,7 +317,9 @@
     part: .2
     tasks: (list (new Jiri-Task part: 1.))))
 
-(jiri-splash-title "Together is up to date!")
+(jiri-splash-uptodate "Together is up to date")
+
+(jiri-splash-updated "Together updated to the lastest version")
 
 (jiri-splash-end 785)
 
