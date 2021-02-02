@@ -32,11 +32,11 @@
       (initialize-aliases)
       (let ((src (cond-expand
                    (local (error "This is the local environment"))
-                   (devel {Directory Home "Devel" "together" "install" "together-update-devel.app"})
-                   (test {Directory Home "Devel" "together" "install" "together-update-test.app"})
-                   (triage {Directory Home "Devel" "together" "install" "together-update-triage.app"})
-                   (stage {Directory Home "Devel" "together" "install" "together-update-stage.app"})
-                   (prod {Directory Home "Devel" "together" "install" "together-update-prod.app"})))
+                   (devel {Directory Home "Devel" "together" "install" "together-sirius-devel.app"})
+                   (test {Directory Home "Devel" "together" "install" "together-sirius-test.app"})
+                   (triage {Directory Home "Devel" "together" "install" "together-sirius-triage.app"})
+                   (stage {Directory Home "Devel" "together" "install" "together-sirius-stage.app"})
+                   (prod {Directory Home "Devel" "together" "install" "together-sirius-prod.app"})))
             (dst (cond-expand
                    (local (error "This is the local environment"))
                    (devel {Directory :root "Volumes" "Together" "Together Devel.app"})
