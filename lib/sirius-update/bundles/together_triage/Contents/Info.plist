@@ -16,5 +16,11 @@
 	<string>APPL</string>
    <key>NSHighResolutionCapable</key>
 	<true/>
+   <key>NSCameraUsageDescription</key>
+   <string>Together requires access to your Camera.</string>
+   <key>NSMicrophoneUsageDescription</key>
+   <string>Together requires access to your Microphone.</string>
+   <key>NSDocumentsFolderUsageDescription</key>
+   <string>Together requires access to your Documents.</string>
 </dict>
 </plist>
