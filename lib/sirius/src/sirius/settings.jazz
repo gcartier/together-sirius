@@ -160,7 +160,7 @@
    (jiri-password "8Ttx78ezKB3k7Gz"))
   (else
    (jiri-username "yownubeta")
-   (jiri-password "world123")))
+   (jiri-password "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")))
 
 (jiri-password-message "Please enter your closed-alpha password:")
 
