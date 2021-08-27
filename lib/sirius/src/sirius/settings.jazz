@@ -166,47 +166,6 @@
 
 
 ;;;
-;;;; Launch
-;;;
-
-
-@universal
-(cond-expand
-  (windows
-    (jiri-launch-uninstall? #f))
-  (else))
-
-
-;;;
-;;;; Install
-;;;
-
-
-@universal
-(cond-expand
-  (windows
-    (jiri-install-section
-      (new Jiri-Section
-        title: "sirius"
-        dir: "sirius"
-        part: .2
-        connection: (new Jiri-Connection
-                      title: "sirius"
-                      url: (string-append sirius-host (cond-expand
-                                                        (local "together-sirius-windows.git")
-                                                        (devel "together-sirius-devel-windows.git")
-                                                        (test "together-sirius-test-windows.git")
-                                                        (triage "together-sirius-triage-windows.git")
-                                                        (stage "together-sirius-stage-windows.git")
-                                                        (prod "together-sirius-prod-windows.git")))
-                      branch: "master"
-                      dirname: "sirius-install")))
-    
-    (jiri-install-current "sirius/current"))
-  (else))
-
-
-;;;
 ;;;; Update
 ;;;
 
@@ -272,6 +231,7 @@
                   url: (string-append together-host (cond-expand
                                                       (mac (cond-expand
                                                              (local "together-test-mac.git")
+                                                             (devel "together-test-mac.git")
                                                              (test "together-test-mac.git")
                                                              (triage "together-triage-mac.git")
                                                              (stage "together-stage-mac.git")

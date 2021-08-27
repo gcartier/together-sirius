@@ -121,7 +121,7 @@
           scriptable?: #f
           platform?: #t
           git?: #t
-          files: '("Together.exe" @universal "Launch.exe" @universal "Install.exe" @universal "Uninstall.exe" "curl.exe")))))))
+          files: '("Together.exe" "curl.exe")))))))
 
 
 ;;;

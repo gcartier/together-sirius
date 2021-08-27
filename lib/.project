@@ -16,8 +16,4 @@
 (form
   (<Project> name: lib
     (<*>               tag-reference: {File :context "sirius" ".project"})
-    (<*>               tag-reference: {File :context "sirius-setup" ".project"})
-    (<*>               tag-reference: {File :context "sirius-launch" ".project"})
-    (<*>               tag-reference: {File :context "sirius-install" ".project"})
-    (<*>               tag-reference: {File :context "sirius-uninstall" ".project"})
     (<*>               tag-reference: {File :context "sirius-update" ".project"}))))
