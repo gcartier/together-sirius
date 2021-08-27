@@ -92,7 +92,6 @@
                (prod "Together")))
 (jiri-title sirius-environment-title)
 (jiri-version "1.0 closed-alpha")
-(jiri-company "")
 (jiri-size (* 60 1024))
 (jiri-background (new-file {Directory Resources "lib" "sirius" "assets"} sirius-background))
 (jiri-connections? #f)
