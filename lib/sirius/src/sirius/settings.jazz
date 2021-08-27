@@ -153,16 +153,8 @@
 ;;;
 
 
-;; hardcode passwords until mac modal dialog on credentials problems fixed
-(cond-expand
-  (stage
-   (jiri-username "togethersirius")
-   (jiri-password "8Ttx78ezKB3k7Gz"))
-  (else
-   (jiri-username "yownubeta")
-   (jiri-password "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")))
-
-(jiri-password-message "Please enter your closed-alpha password:")
+(jiri-username "yownubeta")
+(jiri-password "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")
 
 
 ;;;
