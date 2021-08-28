@@ -102,6 +102,7 @@
    
    (definition installation-dirname
      (cond-expand
+       (devel "together-sirius-devel")
        (test "together-sirius-test")
        (triage "together-sirius-triage")
        (stage "together-sirius-stage")
