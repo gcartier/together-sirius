@@ -91,17 +91,10 @@
                (stage "Together Stage")
                (prod "Together")))
 (jiri-title sirius-environment-title)
-(jiri-version "1.0 closed-alpha")
-(jiri-size (* 60 1024))
 (jiri-background (new-file {Directory Resources "lib" "sirius" "assets"} sirius-background))
 (jiri-connections? #f)
 (jiri-dark-overlay? #t)
-(jiri-game "application")
-(jiri-play "Enter")
-(jiri-play-ready "Together is ready to launch!")
 (jiri-application "Together")
-(jiri-launcher "Together")
-(jiri-email "gucartier@gmail.com")
 
 
 ;;;
