@@ -173,6 +173,7 @@
                                                            (prod "together-sirius-prod-mac.git")))
                                                     (windows (cond-expand
                                                                (test "together-sirius-test-windows.git")
+                                                               (devel "together-sirius-devel-windows.git")
                                                                (triage "together-sirius-triage-windows.git")
                                                                (stage "together-sirius-stage-windows.git")
                                                                (prod "together-sirius-prod-windows.git")))))
@@ -222,6 +223,7 @@
                                                              (prod "together-prod-mac.git")))
                                                       (windows (cond-expand
                                                                  (test "together-test-windows.git")
+                                                                 (devel "together-test-windows.git")
                                                                  (triage "together-triage-windows.git")
                                                                  (stage "together-stage-windows.git")
                                                                  (prod "together-prod-windows.git")))))
