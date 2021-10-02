@@ -145,8 +145,8 @@
 ;;;
 
 
-(jiri-username "yownubeta")
-(jiri-password "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")
+(jiri-username '(132 122 130 121 128 109 112 127 108))
+(jiri-password '(114 115 123 106 87 97 66 90 63 78 129 76 85 125 85 63 65 81 129 83 125 129 82 111 65 122 93 92 86 120 99 121 63 62 61 110 111 99 108 87))
 
 
 ;;;
