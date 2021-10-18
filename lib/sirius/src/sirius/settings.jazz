@@ -104,11 +104,7 @@
 
 (jiri-installer-crashes
   (list (list "Sirius"
-              (cond-expand
-                (windows
-                 "../.together-sirius/crashes")
-                (else
-                 {Directory Home ".together-sirius" "crashes"}))
+              {Directory Home ".together-sirius" "crashes"}
               "http://logs.togethersphere.com/sirius")))
 
 
