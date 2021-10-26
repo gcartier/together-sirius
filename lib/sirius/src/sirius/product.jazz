@@ -98,7 +98,7 @@
            ignored-contents: '("Apps" "Worlds"))))))
   (else
    (definition install-dir
-     {Directory Home "together" "install"})
+     {Directory Home "Devel" "together" "install"})
    
    (definition installation-dirname
      (cond-expand
@@ -122,7 +122,7 @@
           scriptable?: #f
           platform?: #t
           git?: #t
-          files: '("Together.exe" "curl.exe")))))))
+          files: '("Together" "curl.exe")))))))
 
 
 ;;;

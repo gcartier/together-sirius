@@ -172,7 +172,13 @@
                                                                (devel "together-sirius-devel-windows.git")
                                                                (triage "together-sirius-triage-windows.git")
                                                                (stage "together-sirius-stage-windows.git")
-                                                               (prod "together-sirius-prod-windows.git")))))
+                                                               (prod "together-sirius-prod-windows.git")))
+                                                    (linux (cond-expand
+                                                             (test "together-sirius-test-unix.git")
+                                                             (devel "together-sirius-devel-unix.git")
+                                                             (triage "together-sirius-triage-unix.git")
+                                                             (stage "together-sirius-stage-unix.git")
+                                                             (prod "together-sirius-prod-unix.git")))))
                   branch: "master"
                   dirname: (cond-expand
                              (mac "Update.app")
@@ -180,7 +186,8 @@
 
 (jiri-update-exe (cond-expand
                    (mac "Together")
-                   (windows "Together.exe")))
+                   (windows "Together.exe")
+                   (else "Together")))
 
 
 ;;;
@@ -222,7 +229,13 @@
                                                                  (devel "together-test-windows.git")
                                                                  (triage "together-triage-windows.git")
                                                                  (stage "together-stage-windows.git")
-                                                                 (prod "together-prod-windows.git")))))
+                                                                 (prod "together-prod-windows.git")))
+                                                      (linux (cond-expand
+                                                               (test "together-test-unix.git")
+                                                               (devel "together-test-unix.git")
+                                                               (triage "together-triage-unix.git")
+                                                               (stage "together-stage-unix.git")
+                                                               (prod "together-prod-unix.git")))))
                   branch: "master"
                   dirname: (cond-expand
                              (mac "Together.app")
