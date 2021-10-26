@@ -2,8 +2,8 @@
 
 REL="$(dirname "$0")"
 
-if [ -f "$REL/.jaz" ]; then
-	source "$REL/.jaz"
+if [ -f ".jaz" ]; then
+    . "$(pwd)/.jaz"
 fi
 
 JIR="$REL/jiri"
