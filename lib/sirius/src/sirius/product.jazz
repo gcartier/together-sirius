@@ -96,9 +96,9 @@
            platform?: #t
            git?: #t
            ignored-contents: '("Apps" "Worlds"))))))
-  (else
+  (windows
    (definition install-dir
-     {Directory Home "Devel" "together" "install"})
+     {Directory Home "together" "install"})
    
    (definition installation-dirname
      (cond-expand
@@ -107,11 +107,6 @@
        (triage "together-sirius-triage")
        (stage "together-sirius-stage")
        (prod "together-sirius-prod")))
-   
-   (definition together-executable
-     (cond-expand
-       (windows "Together.exe")
-       (else "Together")))
    
    
    (definition (install descriptor)
@@ -127,7 +122,34 @@
           scriptable?: #f
           platform?: #t
           git?: #t
-          files: (list together-executable "curl.exe")))))))
+          files: '("Together.exe" "curl.exe"))))))
+  (else
+   (definition install-dir
+     {Directory Home "Devel" "together" "install"})
+   
+   (definition installation-dirname
+     (cond-expand
+       (devel "together-sirius-devel")
+       (test "together-sirius-test")
+       (triage "together-sirius-triage")
+       (stage "together-sirius-stage")
+       (prod "together-sirius-prod")))
+   
+   
+   (definition (install descriptor)
+     (cond-expand
+       (local
+        (error "This is the local environment"))
+       (else
+        (initialize-aliases)
+        (install-application descriptor install-dir
+          name: installation-dirname
+          executable?: #f
+          source-access?: kernel-source-accessible?
+          scriptable?: #f
+          platform?: #t
+          git?: #t
+          files: '("Together" "curl.exe")))))))
 
 
 ;;;
