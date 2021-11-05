@@ -108,6 +108,11 @@
        (stage "together-sirius-stage")
        (prod "together-sirius-prod")))
    
+   (definition together-executable
+     (cond-expand
+       (windows "Together.exe")
+       (else "Together")))
+   
    
    (definition (install descriptor)
      (cond-expand
@@ -122,7 +127,7 @@
           scriptable?: #f
           platform?: #t
           git?: #t
-          files: '("Together" "curl.exe")))))))
+          files: (list together-executable "curl.exe")))))))
 
 
 ;;;
