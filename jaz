@@ -59,14 +59,56 @@ display_all_status () {
     (display_status "Jazz" "$JAZZ")
 }
 
+display_diff () {
+    feedback "${REPOCOLOR}$1${NOCOLOR}"
+    if [ -d "$2" ]; then
+	     cd "$2" &&
+	     git diff
+    fi
+}
+
+display_all_diff () {
+    (display_diff "Sirius" "$REL")
+    echo
+    (display_diff "Jiri" "$JIRI")
+    echo
+    (display_diff "Jazz" "$JAZZ")
+}
+
+pull () {
+    feedback "${REPOCOLOR}$1${NOCOLOR}"
+    if [ -d "$2" ]; then
+	     cd "$2" &&
+	     git pull
+    fi
+}
+
+pull_all () {
+    (pull "Sirius" "$REL")
+    echo
+    (pull "Jiri" "$JIRI")
+    echo
+    (pull "Jazz" "$JAZZ")
+}
+
 case "$1" in
+	"info" )
+		display_all_info
+		exit
+		;;
+
 	"status" )
 		display_all_status
 		exit
 		;;
 
-	"info" )
-		display_all_info
+	"diff" )
+		display_all_diff
+		exit
+		;;
+
+	"pull" )
+		pull_all
 		exit
 		;;
 esac
