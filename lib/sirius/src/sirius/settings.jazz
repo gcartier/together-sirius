@@ -30,7 +30,7 @@
 
 
 (definition sirius-host
-  "https://github.com/gcartier/")
+  "togethersphere.com")
 
 
 (definition sirius-environment-info
@@ -39,6 +39,7 @@
     (devel  (list "Together" "devel"))
     (test   (list "Together" "test"))
     (triage (list "Together" "triage"))
+    (stable (list "Together" "stable"))
     (stage  (list "Together" "stage"))
     (prod   (list "Together" "prod"))))
 
@@ -68,6 +69,7 @@
     (devel  (list "Devel"  "devel"))
     (test   (list "Test"   "test"))
     (triage (list "Triage" "triage"))
+    (stable (list "Stage"  "stable"))
     (stage  (list "Stage"  "stage"))
     (prod   (list "Prod"   "prod"))))
 
@@ -88,6 +90,7 @@
                (devel "Together Devel")
                (test "Together Test")
                (triage "Together Triage")
+               (stable "Together Stable")
                (stage "Together Stage")
                (prod "Together")))
 (jiri-title sirius-environment-title)
@@ -117,6 +120,7 @@
                    (devel  "app/.together/devel/1.0.0/work/crashes")
                    (test   "app/.together/test/1.0.0/work/crashes")
                    (triage "app/.together/triage/1.0.0/work/crashes")
+                   (stable "app/.together/stable/1.0.0/work/crashes")
                    (stage  "app/.together/stage/1.0.0/work/crashes")
                    (prod   "app/.together/prod/1.0.0/work/crashes")))
                 (else
@@ -125,6 +129,7 @@
                    (devel  {Directory Home ".together" "devel" "1.0.0" "work" "crashes"})
                    (test   {Directory Home ".together" "test" "1.0.0" "work" "crashes"})
                    (triage {Directory Home ".together" "triage" "1.0.0" "work" "crashes"})
+                   (stable {Directory Home ".together" "stable" "1.0.0" "work" "crashes"})
                    (stage  {Directory Home ".together" "stage" "1.0.0" "work" "crashes"})
                    (prod   {Directory Home ".together" "prod" "1.0.0" "work" "crashes"}))))
               (cond-expand
@@ -132,6 +137,7 @@
                 (devel  "http://logs.togethersphere.com/devel")
                 (test   "http://logs.togethersphere.com/test")
                 (triage "http://logs.togethersphere.com/triage")
+                (stable "http://logs.togethersphere.com/stable")
                 (stage  "http://logs.togethersphere.com/stage")
                 (prod   "http://logs.togethersphere.com/prod")))))
 
@@ -141,8 +147,8 @@
 ;;;
 
 
-(jiri-username '(132 122 130 121 128 109 112 127 108))
-(jiri-password '(114 115 123 106 87 97 66 90 63 78 129 76 85 125 85 63 65 81 129 83 125 129 82 111 65 122 93 92 86 120 99 121 63 62 61 110 111 99 108 87))
+@w
+(jiri-key '(1 2 3))
 
 
 ;;;
@@ -159,27 +165,30 @@
     part: .2
     connection: (new Jiri-Connection
                   title: "sirius"
-                  url: (string-append sirius-host (cond-expand
-                                                    (mac (cond-expand
-                                                           (local "together-sirius-test-mac.git")
-                                                           (devel "together-sirius-devel-mac.git")
-                                                           (test "together-sirius-test-mac.git")
-                                                           (triage "together-sirius-triage-mac.git")
-                                                           (stage "together-sirius-stage-mac.git")
-                                                           (prod "together-sirius-prod-mac.git")))
-                                                    (windows (cond-expand
-                                                               (test "together-sirius-test-windows.git")
-                                                               (devel "together-sirius-devel-windows.git")
-                                                               (triage "together-sirius-triage-windows.git")
-                                                               (stage "together-sirius-stage-windows.git")
-                                                               (prod "together-sirius-prod-windows.git")))
-                                                    (linux (cond-expand
-                                                             (test "together-sirius-test-unix.git")
-                                                             (devel "together-sirius-devel-unix.git")
-                                                             (triage "together-sirius-triage-unix.git")
-                                                             (stage "together-sirius-stage-unix.git")
-                                                             (prod "together-sirius-prod-unix.git")))))
-                  branch: "master"
+                  host: sirius-host
+                  path: (cond-expand
+                          (mac (cond-expand
+                                 (local "together-sirius-test-mac")
+                                 (devel "together-sirius-devel-mac")
+                                 (test "together-sirius-test-mac")
+                                 (triage "together-sirius-triage-mac")
+                                 (stable "together-sirius-stable-mac")
+                                 (stage "together-sirius-stage-mac")
+                                 (prod "together-sirius-prod-mac")))
+                          (windows (cond-expand
+                                     (test "together-sirius-test-windows")
+                                     (devel "together-sirius-devel-windows")
+                                     (triage "together-sirius-triage-windows")
+                                     (stable "together-sirius-stable-windows")
+                                     (stage "together-sirius-stage-windows")
+                                     (prod "together-sirius-prod-windows")))
+                          (linux (cond-expand
+                                   (test "together-sirius-test-unix")
+                                   (devel "together-sirius-devel-unix")
+                                   (triage "together-sirius-triage-unix")
+                                   (stable "together-sirius-stable-unix")
+                                   (stage "together-sirius-stage-unix")
+                                   (prod "together-sirius-prod-unix"))))
                   dirname: (cond-expand
                              (mac "Update.app")
                              (else "update")))))
@@ -216,27 +225,30 @@
     part: .4
     connection: (new Jiri-Connection
                   title: together-environment-title
-                  url: (string-append together-host (cond-expand
-                                                      (mac (cond-expand
-                                                             (local "together-test-mac.git")
-                                                             (devel "together-test-mac.git")
-                                                             (test "together-test-mac.git")
-                                                             (triage "together-triage-mac.git")
-                                                             (stage "together-stage-mac.git")
-                                                             (prod "together-prod-mac.git")))
-                                                      (windows (cond-expand
-                                                                 (test "together-test-windows.git")
-                                                                 (devel "together-test-windows.git")
-                                                                 (triage "together-triage-windows.git")
-                                                                 (stage "together-stage-windows.git")
-                                                                 (prod "together-prod-windows.git")))
-                                                      (linux (cond-expand
-                                                               (test "together-test-unix.git")
-                                                               (devel "together-test-unix.git")
-                                                               (triage "together-triage-unix.git")
-                                                               (stage "together-stage-unix.git")
-                                                               (prod "together-prod-unix.git")))))
-                  branch: "master"
+                  host: sirius-host
+                  path: (cond-expand
+                          (mac (cond-expand
+                                 (local "together-test-mac")
+                                 (devel "together-test-mac")
+                                 (test "together-test-mac")
+                                 (triage "together-triage-mac")
+                                 (stable "together-prod-mac")
+                                 (stage "together-stage-mac")
+                                 (prod "together-prod-mac")))
+                          (windows (cond-expand
+                                     (test "together-test-windows")
+                                     (devel "together-test-windows")
+                                     (triage "together-triage-windows")
+                                     (stable "together-prod-windows")
+                                     (stage "together-stage-windows")
+                                     (prod "together-prod-windows")))
+                          (linux (cond-expand
+                                   (test "together-test-unix")
+                                   (devel "together-test-unix")
+                                   (triage "together-triage-unix")
+                                   (stable "together-prod-unix")
+                                   (stage "together-stage-unix")
+                                   (prod "together-prod-unix"))))
                   dirname: (cond-expand
                              (mac "Together.app")
                              (else "together")))))
@@ -256,8 +268,8 @@
     part: .1
     connection: (new Jiri-Connection
                   title: "World"
-                  url: (string-append together-host "together-world-universal.git")
-                  branch: "master"
+                  host: sirius-host
+                  path: "together-world-universal"
                   dirname: "together")))
 
 
