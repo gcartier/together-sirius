@@ -95,7 +95,6 @@
            bundle: "together"
            source-access?: kernel-source-accessible?
            platform?: #t
-           git?: #t
            ignored-contents: '("Apps" "Worlds"))))))
   (windows
    (definition install-dir
@@ -123,7 +122,6 @@
           source-access?: kernel-source-accessible?
           scriptable?: #f
           platform?: #t
-          git?: #t
           files: '("Together.exe" "curl.exe"))))))
   (else
    (definition install-dir
@@ -151,7 +149,6 @@
           source-access?: kernel-source-accessible?
           scriptable?: #f
           platform?: #t
-          git?: #t
           files: '("Together" "curl.exe")))))))
 
 
