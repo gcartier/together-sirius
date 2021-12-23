@@ -241,6 +241,7 @@
                                    (stable "together-prod-unix")
                                    (stage "together-stage-unix")
                                    (prod "together-prod-unix"))))
+                  sets: '(#f)
                   dirname: (cond-expand
                              (mac "Together.app")
                              (else "together")))))
