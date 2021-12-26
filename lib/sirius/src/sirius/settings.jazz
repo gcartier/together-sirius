@@ -241,7 +241,7 @@
                                    (stable "together-prod-unix")
                                    (stage "together-stage-unix")
                                    (prod "together-prod-unix"))))
-                  sets: '(#f object-base object-live)
+                  sets: '(#f object-base (object))
                   dirname: (cond-expand
                              (mac "Together.app")
                              (else "together")))))
