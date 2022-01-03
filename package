@@ -38,3 +38,14 @@ ln -s /Applications $MOUNT/Applications
 hdiutil detach -quiet $MOUNT
 hdiutil convert TogetherTemplate.dmg -quiet -format UDZO -o Together.dmg
 rm TogetherTemplate.dmg
+
+# Test
+# Mount dmg and check that it worked
+# Unmount it
+
+# Push
+# Copy Together.dmg to website/limited
+# commit and push
+# go to montreal
+# cd /var/www/together
+# sudo git pull
