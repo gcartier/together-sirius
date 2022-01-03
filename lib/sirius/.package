@@ -3,18 +3,7 @@
   (root "src")
   (products (sirius (title "Sirius")
                     (product sirius.product)
-                    (update sirius.deploy
-                            sirius.product
+                    (update sirius.product
                             sirius.settings)
-                    (dependencies (cond
-                                    #; ;; universal
-                                    (windows
-                                      sirius-setup
-                                      sirius-launch
-                                      sirius-install
-                                      sirius-uninstall)
-                                    (else
-                                      sirius-update))))
-            (sirius-deploy (alias deploy)
-                           (run sirius.deploy)))
+                    (dependencies sirius-update)))
   (project ".project"))

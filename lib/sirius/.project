@@ -18,5 +18,4 @@
     (<Project-Directory>                  directory: {Directory :context "src"}
       (<Project-Directory>                directory: {Directory :context "src" "sirius"}
         (<Jazz-File>       name: settings source: {File :context "src" "sirius" "settings.jazz"})
-        (<Jazz-File>       name: product  source: {File :context "src" "sirius" "product.jazz"})
-        (<Jazz-File>       name: deploy   source: {File :context "src" "sirius" "deploy.jazz"}))))))
+        (<Jazz-File>       name: product  source: {File :context "src" "sirius" "product.jazz"}))))))

@@ -2,11 +2,9 @@
   
   (root "src")
   (products (sirius-update (title "Sirius Update")
-                           (product sirius-update.product)
                            (run sirius-update.run)
                            (build (sirius-update executable: "Together" bundle: "together" resources: "resources"))
                            (update sirius-update.appl
-                                   sirius-update.product
                                    sirius-update.run)
                            (dependencies jiri)))
   (project ".project"))
