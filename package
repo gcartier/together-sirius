@@ -1,0 +1,40 @@
+#! /bin/sh
+
+TOGETHER=~/Devel/together
+NOTARY=$TOGETHER/notary
+IMAGE=$TOGETHER/image
+MOUNT="/Volumes/Together"
+
+# Bail out
+set -e
+
+cd $IMAGE
+
+# Setup
+if [ -d "$MOUNT" ]; then
+	hdiutil detach -quiet "$MOUNT"
+fi
+
+if [ -f "TogetherTemplate.dmg" ]; then
+	rm "TogetherTemplate.dmg"
+fi
+
+if [ -f "Together.dmg" ]; then
+	rm "Together.dmg"
+fi
+
+# Create and attach template
+hdiutil create -quiet -volname Together -fs HFS+ -size 200m -attach TogetherTemplate.dmg
+
+# Copy files
+cp -R $NOTARY/together-sirius-prod.app $MOUNT/Together.app
+cp -R background $MOUNT/.background
+ln -s /Applications $MOUNT/Applications
+
+# Prettify
+/usr/bin/osascript Prettify
+
+# Detach and compress
+hdiutil detach -quiet $MOUNT
+hdiutil convert TogetherTemplate.dmg -quiet -format UDZO -o Together.dmg
+rm TogetherTemplate.dmg
