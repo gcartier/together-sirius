@@ -2,7 +2,7 @@
 
 REL="$(dirname "$0")"
 
-JIR="$REL/jiri"
+JIRI="$REL/jiri"
 JAZZ="$REL/jazz"
 JAZ="$JAZZ/jaz"
 
@@ -38,7 +38,7 @@ display_info () {
 display_all_info () {
     (display_info "Sirius" "$REL")
     echo
-    (display_info "Jiri" "$JIR")
+    (display_info "Jiri" "$JIRI")
     echo
     (display_info "Jazz" "$JAZZ")
 }
@@ -54,7 +54,7 @@ display_status () {
 display_all_status () {
     (display_status "Sirius" "$REL")
     echo
-    (display_status "Jiri" "$JIR")
+    (display_status "Jiri" "$JIRI")
     echo
     (display_status "Jazz" "$JAZZ")
 }
