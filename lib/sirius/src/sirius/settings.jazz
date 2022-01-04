@@ -221,7 +221,7 @@
                                    (stable "together-prod-linux")
                                    (stage "together-stage-linux")
                                    (prod "together-prod-linux"))))
-                  sets: '(#f object-base (object))
+                  sets: '(#f object-base (object) (resource))
                   update-sets: '(gstreamer outline)
                   dirname: (cond-expand
                              (mac "Together.app")
