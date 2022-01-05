@@ -32,3 +32,6 @@ done
 # /usr/bin/xcrun altool --notarization-info <key-returned-from-previous-command> -u gucartier@gmail.com -p @keychain:Together\ Test
 # /usr/bin/xcrun stapler staple -v together-sirius-prod.app
 # rm together-sirius-prod.zip
+
+# Notes
+# - if the codesigning fails, there will be a LogFileURL that can be pasted into a browser to have a full log
