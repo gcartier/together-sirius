@@ -95,6 +95,7 @@
            bundle: "together"
            source-access?: kernel-source-accessible?
            platform?: #t
+           opengl?: #t
            ignored-contents: '("Apps" "Worlds"))))))
   (windows
    (definition install-dir
@@ -122,6 +123,7 @@
           source-access?: kernel-source-accessible?
           scriptable?: #f
           platform?: #t
+          opengl?: #t
           files: '("Together.exe" "curl.exe"))))))
   (else
    (definition install-dir
@@ -149,6 +151,7 @@
           source-access?: kernel-source-accessible?
           scriptable?: #f
           platform?: #t
+          opengl?: #t
           files: '("Together" "curl.exe")))))))
 
 
