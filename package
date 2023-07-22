@@ -2,13 +2,13 @@
 
 TOGETHER=~/Devel/together
 NOTARY=$TOGETHER/notary
-IMAGE=$TOGETHER/image
+PACKAGE=$TOGETHER/package
 MOUNT="/Volumes/Together"
 
 # Bail out
 set -e
 
-cd $IMAGE
+cd $PACKAGE
 
 # Setup
 if [ -d "$MOUNT" ]; then
