@@ -1,0 +1,27 @@
+#! /bin/sh
+
+TOGETHER=~/Devel/together
+NOTARY=$TOGETHER/notary
+PACKAGE=$TOGETHER/package
+MOUNT="/Volumes/Together"
+
+# Bail out
+set -e
+
+cd $PACKAGE
+
+# Setup
+if [ -d "$MOUNT" ]; then
+	hdiutil detach -quiet "$MOUNT"
+fi
+
+if [ -f "TogetherTemplate.dmg" ]; then
+	rm "TogetherTemplate.dmg"
+fi
+
+if [ -f "Together.dmg" ]; then
+	rm "Together.dmg"
+fi
+
+# Create and attach template
+hdiutil create -quiet -volname Together -fs HFS+ -size 200m -attach TogetherTemplate.dmg
