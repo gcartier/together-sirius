@@ -93,6 +93,9 @@
          (install-application descriptor install-dir
            name: installation-dirname
            bundle: "together"
+           info-plist: (cond-expand
+                         (prod {File Sirius "devel" "Info.plist"})
+                         (else #f))
            source-access?: kernel-source-accessible?
            platform?: #t
            opengl?: #t
