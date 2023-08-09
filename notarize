@@ -11,7 +11,7 @@ set -e
 echo Copying...
 cd $NOTARY
 rm -rf together-sirius-prod.app
-cp -R $INSTALL/together-sirius-prod.app together-sirius-prod.app
+cp -R $INSTALL/together-sirius-prod together-sirius-prod.app
 cd together-sirius-prod.app
 rm -rf .jas
 jas init -open
