@@ -162,7 +162,9 @@
                                    (stage "together-sirius-stage-linux")
                                    (prod "together-sirius-prod-linux"))))
                   dirname: (cond-expand
-                             (mac "Update.app")
+                             ;; the removal of the .app suffix is to ensure only
+                             ;; sirius gets registered for the togethersphere url
+                             (mac "Update")
                              (else "update")))))
 
 (jiri-update-exe (cond-expand
