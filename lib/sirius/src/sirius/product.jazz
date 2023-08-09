@@ -76,12 +76,12 @@
     (definition installation-dirname
       (cond-expand
         (local #f)
-        (devel "together-sirius-devel.app")
-        (test "together-sirius-test.app")
-        (triage "together-sirius-triage.app")
-        (stable "together-sirius-stable.app")
-        (stage "together-sirius-stage.app")
-        (prod "together-sirius-prod.app")))
+        (devel "together-sirius-devel")
+        (test "together-sirius-test")
+        (triage "together-sirius-triage")
+        (stable "together-sirius-stable")
+        (stage "together-sirius-stage")
+        (prod "together-sirius-prod")))
     
     
     (definition (install descriptor)
