@@ -93,6 +93,22 @@
 
 
 ;;;
+;;;; Name
+;;;
+
+
+(jiri-name-setting
+  (cond-expand
+    (local  {File Home ".together" "test" "1.0.0" ".name"})
+    (devel  {File Home ".together" "devel" "1.0.0" ".name"})
+    (test   {File Home ".together" "test" "1.0.0" ".name"})
+    (triage {File Home ".together" "triage" "1.0.0" ".name"})
+    (stable {File Home ".together" "stable" "1.0.0" ".name"})
+    (stage  {File Home ".together" "stage" "1.0.0" ".name"})
+    (prod   {File Home ".together" "prod" "1.0.0" ".name"})))
+
+
+;;;
 ;;;; Crashes
 ;;;
 
