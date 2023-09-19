@@ -5,32 +5,39 @@ NOTARY=$TOGETHER/notary
 PACKAGE=$TOGETHER/package
 MOUNT="/Volumes/Together"
 
+if [[ "$(arch)" == "arm64" ]]; then
+  SIRIUS="together-sirius-prod-silicon"
+  TEMPLATE_DMG="TogetherTemplateSilicon.dmg"
+  TOGETHER_DMG="Together Apple Silicon.dmg"
+else
+  SIRIUS="together-sirius-prod-mac"
+  TEMPLATE_DMG="TogetherTemplate.dmg"
+  TOGETHER_DMG="Together.dmg"
+fi
+
 # Bail out
 set -e
 
 cd $PACKAGE
 
-# quick hack for now to split script into mount and package around
-# copy to volume only working when done manually from the finder
-
 # Setup
-# if [ -d "$MOUNT" ]; then
-# 	hdiutil detach -quiet "$MOUNT"
-# fi
-# 
-# if [ -f "TogetherTemplate.dmg" ]; then
-# 	rm "TogetherTemplate.dmg"
-# fi
-# 
-# if [ -f "Together.dmg" ]; then
-# 	rm "Together.dmg"
-# fi
+if [ -d "$MOUNT" ]; then
+	hdiutil detach -quiet "$MOUNT"
+fi
+
+if [ -f "$TEMPLATE_DMG" ]; then
+	rm "$TEMPLATE_DMG"
+fi
+
+if [ -f "$TOGETHER_DMG" ]; then
+	rm "$TOGETHER_DMG"
+fi
 
 # Create and attach template
-# hdiutil create -quiet -volname Together -fs HFS+ -size 200m -attach TogetherTemplate.dmg
+hdiutil create -quiet -volname Together -fs HFS+ -size 200m -attach "$TEMPLATE_DMG"
 
 # Copy files
-# cp -R $NOTARY/together-sirius-prod.app $MOUNT/Together.app
+cp -R $NOTARY/$SIRIUS.app $MOUNT/Together.app
 cp -R background $MOUNT/.background
 ln -s /Applications $MOUNT/Applications
 
@@ -39,18 +46,18 @@ ln -s /Applications $MOUNT/Applications
 
 # Detach and compress
 hdiutil detach -quiet $MOUNT
-hdiutil convert TogetherTemplate.dmg -quiet -format UDZO -o Together.dmg
-rm TogetherTemplate.dmg
+hdiutil convert "$TEMPLATE_DMG" -quiet -format UDZO -o "$TOGETHER_DMG"
+rm "$TEMPLATE_DMG"
 
 # Test
 # Mount dmg and check that it worked
 # Unmount it
 
-# delete $NOTARY/together-sirius-prod.app so that there is no url types
+# delete $NOTARY/$SIRIUS.app so that there is no url types
 # Info.plist active
 
 # Push
-# Copy Together.dmg to website/limited
+# Copy $TOGETHER_DMG to website/limited
 # commit and push
 # go to montreal
 # cd /var/www/together

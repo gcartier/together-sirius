@@ -4,15 +4,21 @@ TOGETHER=~/Devel/together
 INSTALL=$TOGETHER/install
 NOTARY=$TOGETHER/notary
 
+if [[ "$(arch)" == "arm64" ]]; then
+  SIRIUS=together-sirius-prod-silicon
+else
+  SIRIUS=together-sirius-prod-mac
+fi
+
 # Bail out
 set -e
 
 # Setup
 echo Copying...
 cd $NOTARY
-rm -rf together-sirius-prod.app
-cp -R $INSTALL/together-sirius-prod together-sirius-prod.app
-cd together-sirius-prod.app
+rm -rf $SIRIUS.app
+cp -R $INSTALL/$SIRIUS $SIRIUS.app
+cd $SIRIUS.app
 rm -rf .jas
 jas init -open
 jas add .
@@ -20,18 +26,18 @@ mv .jas Contents/Resources
 cd ..
 
 # Sign
-/usr/bin/xattr -r -c -s together-sirius-prod.app
-for filename in together-sirius-prod.app/Contents/Libraries/*.dylib; do
+/usr/bin/xattr -r -c -s $SIRIUS.app
+for filename in $SIRIUS.app/Contents/Libraries/*.dylib; do
     /usr/bin/codesign --force --options runtime --entitlements Entitlements.plist --timestamp --verbose=4 -s "Developer ID Application: Guillaume Cartier (R74FF3EJWG)" --digest-algorithm=sha1,sha256 $filename
 done
-/usr/bin/codesign --force --options runtime --entitlements Entitlements.plist --timestamp --verbose=4 -s "Developer ID Application: Guillaume Cartier (R74FF3EJWG)" --digest-algorithm=sha1,sha256 together-sirius-prod.app
+/usr/bin/codesign --force --options runtime --entitlements Entitlements.plist --timestamp --verbose=4 -s "Developer ID Application: Guillaume Cartier (R74FF3EJWG)" --digest-algorithm=sha1,sha256 $SIRIUS.app
 
 # Notarize
-/usr/bin/ditto -c -k --keepParent together-sirius-prod.app together-sirius-prod.zip
-/usr/bin/xcrun altool --notarize-app -f together-sirius-prod.zip --primary-bundle-id com.togethersphere.TogetherSirius -u gucartier@gmail.com -p @keychain:Together\ Test --output-format xml
-# /usr/bin/xcrun altool --notarization-info <key-returned-from-previous-command> -u gucartier@gmail.com -p @keychain:Together\ Test
-# /usr/bin/xcrun stapler staple -v together-sirius-prod.app
-# rm together-sirius-prod.zip
+/usr/bin/ditto -c -k --keepParent $SIRIUS.app $SIRIUS.zip
+/usr/bin/xcrun altool --notarize-app -f $SIRIUS.zip --primary-bundle-id com.togethersphere.TogetherSirius -u gucartier@gmail.com -p @keychain:Together --output-format xml
+# /usr/bin/xcrun altool --notarization-info <key-returned-from-previous-command> -u gucartier@gmail.com -p @keychain:Together
+# /usr/bin/xcrun stapler staple -v $SIRIUS.app
+# rm $SIRIUS.zip
 
 # Notes
 # - if the codesigning fails, there will be a LogFileURL that can be pasted into a browser to have a full log

@@ -73,15 +73,27 @@
     (definition install-dir
       {Directory Home "Devel" "together" "install"})
    
-    (definition installation-dirname
-      (cond-expand
-        (local #f)
-        (devel "together-sirius-devel")
-        (test "together-sirius-test")
-        (triage "together-sirius-triage")
-        (stable "together-sirius-stable")
-        (stage "together-sirius-stage")
-        (prod "together-sirius-prod")))
+    (cond-expand
+      (silicon
+       (definition installation-dirname
+         (cond-expand
+           (local #f)
+           (devel "together-sirius-devel-silicon")
+           (test "together-sirius-test-silicon")
+           (triage "together-sirius-triage-silicon")
+           (stable "together-sirius-stable-silicon")
+           (stage "together-sirius-stage-silicon")
+           (prod "together-sirius-prod-silicon"))))
+      (else
+       (definition installation-dirname
+         (cond-expand
+           (local #f)
+           (devel "together-sirius-devel-mac")
+           (test "together-sirius-test-mac")
+           (triage "together-sirius-triage-mac")
+           (stable "together-sirius-stable-mac")
+           (stage "together-sirius-stage-mac")
+           (prod "together-sirius-prod-mac")))))
     
     
     (definition (install descriptor)
