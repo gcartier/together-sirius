@@ -297,7 +297,7 @@
 (jiri-splash-updated "You now have the latest version of Together!")
 
 (jiri-splash-end (cond-expand (windows 883)
-                              (else 869)))
+                              (else 860)))
 
 
 ;;;
