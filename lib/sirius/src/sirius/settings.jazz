@@ -116,7 +116,8 @@
 (jiri-installer-crashes
   (list (list "Sirius"
               {Directory Home ".together-sirius" "crashes"}
-              "http://logs.togethersphere.com/sirius")))
+              (list "snapshot")
+              "http://logs.togethersphere.com/sirius/crashes")))
 
 
 (jiri-application-crashes
@@ -129,14 +130,15 @@
                 (stable {Directory Home ".together" "stable" "1.0.0" "work" "crashes"})
                 (stage  {Directory Home ".together" "stage" "1.0.0" "work" "crashes"})
                 (prod   {Directory Home ".together" "prod" "1.0.0" "work" "crashes"}))
+              (list "snapshot")
               (cond-expand
-                (local  "http://logs.togethersphere.com/test")
-                (devel  "http://logs.togethersphere.com/devel")
-                (test   "http://logs.togethersphere.com/test")
-                (triage "http://logs.togethersphere.com/triage")
-                (stable "http://logs.togethersphere.com/stable")
-                (stage  "http://logs.togethersphere.com/stage")
-                (prod   "http://logs.togethersphere.com/prod")))))
+                (local  "http://logs.togethersphere.com/test/crashes")
+                (devel  "http://logs.togethersphere.com/devel/crashes")
+                (test   "http://logs.togethersphere.com/test/crashes")
+                (triage "http://logs.togethersphere.com/triage/crashes")
+                (stable "http://logs.togethersphere.com/stable/crashes")
+                (stage  "http://logs.togethersphere.com/stage/crashes")
+                (prod   "http://logs.togethersphere.com/prod/crashes")))))
 
 
 ;;;
