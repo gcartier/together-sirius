@@ -23,6 +23,7 @@ rm -rf .jas
 jas init -open
 jas add .
 mv .jas Contents/Resources
+rm Contents/MacOS/Together_unsigned
 cd ..
 
 # Sign
