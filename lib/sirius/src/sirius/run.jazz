@@ -23,23 +23,12 @@
         (sirius.appl))
 
 
-(definition (install-writable?)
-  (if (cond-expand
-        (mac (directory-writable? kernel-bundle-install))
-        (else #t))
-      #t
-    (system-message (format "Please drag & drop Together on the Applications icon")
-                    type: 'problem
-                    title: "Together")
-    #f))
-
-
 (definition (already-running?)
   (if (cond-expand
         (devel #f)
         (else (process-already-running?)))
       (begin
-        (system-message "Together installer is already running"
+        (system-message "Together update is already running"
                         type: 'message
                         title: "Together")
         #t)
@@ -48,7 +37,5 @@
 
 (register-product-run 'sirius
   (lambda (descriptor)
-    ; bouroum
-    (when #t;(install-writable?)
-      (unless #f;(already-running?)
-        (boot-environment (new Sirius-Application)))))))
+    (unless (already-running?)
+      (boot-environment (new Sirius-Application))))))
