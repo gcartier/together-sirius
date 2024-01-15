@@ -4,6 +4,7 @@ REL="$(dirname "$0")"
 
 JIRI="$REL/jiri"
 JAZZ="$REL/jazz"
+UPDATE="$REL/update"
 JAZ="$JAZZ/jaz"
 
 REPOCOLOR='\033[1;34m'
@@ -38,6 +39,8 @@ display_info () {
 display_all_info () {
     (display_info "Sirius" "$REL")
     echo
+    (display_info "Update" "$UPDATE")
+    echo
     (display_info "Jiri" "$JIRI")
     echo
     (display_info "Jazz" "$JAZZ")
@@ -53,6 +56,8 @@ display_status () {
 
 display_all_status () {
     (display_status "Sirius" "$REL")
+    echo
+    (display_status "Update" "$UPDATE")
     echo
     (display_status "Jiri" "$JIRI")
     echo
@@ -85,6 +90,8 @@ pull () {
 
 pull_all () {
     (pull "Sirius" "$REL")
+    echo
+    (pull "Update" "$UPDATE")
     echo
     (pull "Jiri" "$JIRI")
     echo

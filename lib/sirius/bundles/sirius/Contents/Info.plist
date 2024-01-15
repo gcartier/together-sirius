@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleExecutable</key>
-	<string>Together</string>
+	<string>Sirius</string>
 	<key>CFBundleGetInfoString</key>
-	<string>Together</string>
+	<string>TogetherUpdate</string>
 	<key>CFBundleIconFile</key>
-	<string>together.icns</string>
+	<string>sirius.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.togethersphere.TogetherSirius</string>
 	<key>CFBundleName</key>
-	<string>Together</string>
+	<string>TogetherUpdate</string>
 	<key>CFBundleDisplayName</key>
-	<string>Together</string>
+	<string>TogetherUpdate</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>NSHighResolutionCapable</key>

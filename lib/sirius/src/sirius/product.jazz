@@ -18,7 +18,7 @@
 
 (import (jazz.io)
         (jazz.product)
-        (sirius.settings))
+        (update.settings))
 
 
 ;;;
@@ -29,7 +29,7 @@
 (definition (build descriptor (unit: unit #f) (force?: force? #f))
   (define (resources-dir)
     (cond-expand
-      (mac (new-directory {Directory Build} "together.app/Contents/Resources"))
+      (mac (new-directory {Directory Build} "sirius.app/Contents/Resources"))
       (else {Directory Build})))
   
   (let ((project-dir {Directory Sirius})
@@ -104,14 +104,10 @@
          (initialize-aliases)
          (install-application descriptor install-dir
            name: installation-dirname
-           bundle: "together"
-           info-plist: (cond-expand
-                         (prod {File Sirius "devel" "Info.plist"})
-                         (else #f))
+           bundle: "sirius"
            source-access?: kernel-source-accessible?
            platform?: #t
-           opengl?: #t
-           ignored-contents: '("Apps" "Worlds"))))))
+           opengl?: #t)))))
   (windows
    (definition install-dir
      {Directory Home "together" "install"})
@@ -139,7 +135,7 @@
           scriptable?: #f
           platform?: #t
           opengl?: #t
-          files: '("Together.exe" "curl.exe"))))))
+          files: '("Sirius.exe" "curl.exe"))))))
   (else
    (definition install-dir
      {Directory :root "mnt" "disks" "storage" "devel" "together" "install"})
@@ -167,7 +163,7 @@
           scriptable?: #f
           platform?: #t
           opengl?: #t
-          files: '("Together" "curl.exe")))))))
+          files: '("Sirius" "curl.exe")))))))
 
 
 ;;;

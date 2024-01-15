@@ -10,7 +10,7 @@
 
 
 (form
-  (<Jazz-Project>  name: Sirius-Update default-traits: (Safety.Release) directory: {Directory :context "../../cache"} working: {Directory :context "../.."} product: sirius-update
+  (<Jazz-Project>  name: Sirius      default-traits: (Safety.Release) directory: {Directory :context "../../cache"} working: {Directory :context "../.."} product: sirius
     (<Trait>       name: Safety
       (<install>)
       (<Trait>     name: Debug

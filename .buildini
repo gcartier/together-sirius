@@ -6,4 +6,4 @@
 ;;;
 
 
-(jazz:repositories "jiri;.")
+(jazz:repositories "jiri;update;.")

@@ -1,0 +1,156 @@
+;;;==============
+;;;  JazzScheme
+;;;==============
+;;;
+;;;; Sirius Application
+;;;
+;;;  The Initial Developer of the Original Code is Guillaume Cartier.
+;;;  Portions created by the Initial Developer are Copyright (C) 1996-2015
+;;;  the Initial Developer. All Rights Reserved.
+;;;
+;;;  Contributor(s):
+;;;
+;;;  See www.jazzscheme.org for details.
+
+
+(module sirius.appl jazz
+
+
+(import (jazz.io)
+        (jazz.listener)
+        (jazz.markup)
+        (jazz.platform)
+        (jazz.settings)
+        (jazz.ui)
+        (jazz.view)
+        (jazz.window)
+        (jazz.workspace)
+        (jiri.appl)
+        (jiri.base)
+        (jiri.monitor)
+        (jiri.remote)
+        (jiri.settings)
+        (jiri.structure)
+        (jiri.update)
+        (jiri.view)
+        (jiri.window)
+        (jiri.work))
+
+
+;;;
+;;;; Application
+;;;
+
+
+(class Sirius-Application extends Jiri-Application
+  
+  
+  (method override (new-toplevel self)
+    (new Sirius-Toplevel))
+  
+  
+  (method override (finish-process self)
+    (nextmethod self)
+    (set-title (current-frame) "Update")
+    (start-socket-server))
+
+  
+  (method override (initialize-settings self)
+    (register-resources-alias 'Sirius))
+  
+  
+  (method override (quit-process self (status 0))
+    ;; quicky to completely disable quit
+    (if send-crash-reports-thread
+        (signal-cancel)
+      (quit-callback))))
+
+
+;;;
+;;;; Toplevel
+;;;
+
+
+(class Sirius-Toplevel extends Jiri-Toplevel
+
+
+  (form
+    (<install> caption-base: "Together"))
+  
+  
+  (method override (effective-title self)
+    "Together"))
+
+
+;;;
+;;;; Update
+;;;
+
+
+(definition (was-first-install?)
+  (equal? (string-argument "first-install" "yes") "yes"))
+
+
+(definition protected (update-at-sirius)
+  (set-first-install? (was-first-install?))
+  (setup-stage-view (string-append "Updating " (jiri-title)))
+  (update-crashes-view-color)
+  (update-tasks-done)
+  (let ((thread
+          (new-thread
+            (lambda ()
+              (catch-jiri-exception
+                (lambda ()
+                  (update-data/app
+                    (lambda (new-content?)
+                      (launch-app new-content?
+                        (lambda ()
+                          (update-done))))))))
+            'update)))
+    (thread-base-priority-set! thread update-priority)
+    (thread-start! thread)))
+
+
+(definition (update-done)
+  (set-cursor :arrow)
+  (set-work-done? #t)
+  (update-crashes-view-color)
+  (send-crash-reports (jiri-application-crashes) #t)
+  (quit-callback))
+
+
+;;;
+;;;; Prepare
+;;;
+
+
+(definition (jiri-prepare)
+  (current-root-dir (string-argument "root-dir" #f))
+  (called-from (string-argument "called-from" #f))
+  (cond ((and (current-root-dir)
+              (equal? (called-from) "together"))
+         (set-work-downloaded (integer-argument "work-downloaded" 0))
+         (set-window-h (integer-argument "window-h" -1))
+         (set-window-v (integer-argument "window-v" -1))
+         (set-send-ready? (boolean-argument "send-ready" #f)))
+        (else
+         (system-message "It is incorrect to launch this application"
+                         type: 'problem
+                         title: "Update")
+         (exit 1))))
+
+
+;;;
+;;;; Init
+;;;
+
+
+(set-jiri-init
+  (lambda ()
+    (jiri-prepare)
+    (jiri-layout)))
+
+
+(set-jiri-startup
+  (lambda ()
+    (update-at-sirius))))

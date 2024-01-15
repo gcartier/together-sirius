@@ -15,5 +15,4 @@
 
 (form
   (<Project> name: lib
-    (<*>               tag-reference: {File :context "sirius" ".project"})
-    (<*>               tag-reference: {File :context "sirius-update" ".project"}))))
+    (<*>               tag-reference: {File :context "sirius" ".project"}))))

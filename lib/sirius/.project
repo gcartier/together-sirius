@@ -14,8 +14,10 @@
 
 
 (form
-  (<Project>               name: sirius   description-file: {File :context ".package"}
-    (<Project-Directory>                  directory: {Directory :context "src"}
-      (<Project-Directory>                directory: {Directory :context "src" "sirius"}
-        (<Jazz-File>       name: settings source: {File :context "src" "sirius" "settings.jazz"})
-        (<Jazz-File>       name: product  source: {File :context "src" "sirius" "product.jazz"}))))))
+  (<Project>               name: sirius  description-file: {File :context ".package"}
+    (<*>                                 tag-reference: {File :context "sirius.project"})
+    (<Project-Directory>                 directory: {Directory :context "src"}
+      (<Project-Directory>               directory: {Directory :context "src" "sirius"}
+        (<Jazz-File>       name: appl    source: {File :context "src" "sirius" "appl.jazz"})
+        (<Jazz-File>       name: product source: {File :context "src" "sirius" "product.jazz"})
+        (<Jazz-File>       name: run     source: {File :context "src" "sirius" "run.jazz"}))))))

@@ -2,7 +2,7 @@
 ;;;  JazzScheme
 ;;;==============
 ;;;
-;;;; Sirius-Update Run
+;;;; Sirius Run
 ;;;
 ;;;  The Initial Developer of the Original Code is Guillaume Cartier.
 ;;;  Portions created by the Initial Developer are Copyright (C) 1996-2015
@@ -13,14 +13,14 @@
 ;;;  See www.jazzscheme.org for details.
 
 
-(module sirius-update.run jazz
+(module sirius.run jazz
 
 
 (import (jazz.platform)
         (jazz.process)
-        (sirius.settings)
-        (sirius-update.appl)
-        (jiri.update))
+        (jiri.update)
+        (update.settings)
+        (sirius.appl))
 
 
 (definition (install-writable?)
@@ -46,8 +46,9 @@
     #f))
 
 
-(register-product-run 'sirius-update
+(register-product-run 'sirius
   (lambda (descriptor)
-    (when (install-writable?)
-      (unless (already-running?)
-        (boot-environment (new Sirius-Update-Application)))))))
+    ; bouroum
+    (when #t;(install-writable?)
+      (unless #f;(already-running?)
+        (boot-environment (new Sirius-Application)))))))

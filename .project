@@ -13,4 +13,5 @@
   (<Project> name: sirius description-file: {File :context ".repository"}
     (<*>                      tag-reference: {File :context "jazz" ".project"})
     (<*>                      tag-reference: {File :context "jiri" ".project"})
+    (<*>                      tag-reference: {File :context "update" ".project"})
     (<*>                      tag-reference: {File :context "lib" ".project"}))))
