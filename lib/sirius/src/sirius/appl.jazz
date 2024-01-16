@@ -101,7 +101,7 @@
             (lambda ()
               (catch-jiri-exception
                 (lambda ()
-                  (update-data/app
+                  (update-app/data
                     (lambda (new-content?)
                       (launch-app new-content?
                         (lambda ()
