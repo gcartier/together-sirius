@@ -103,7 +103,7 @@
                 (lambda ()
                   (update-app/data
                     (lambda (new-content?)
-                      (launch-app "Launching together" new-content?
+                      (launch-app "together" new-content?
                         (lambda ()
                           (update-done))))))))
             'update)))
