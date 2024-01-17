@@ -60,10 +60,7 @@
   
   
   (method override (quit-process self (status 0))
-    ;; quicky to completely disable quit
-    (if send-crash-reports-thread
-        (signal-cancel)
-      (quit-callback))))
+    (quit-callback)))
 
 
 ;;;
@@ -105,18 +102,10 @@
                     (lambda (new-content?)
                       (launch-app "together" new-content?
                         (lambda ()
-                          (update-done))))))))
+                          (quit-callback))))))))
             'update)))
     (thread-base-priority-set! thread update-priority)
     (thread-start! thread)))
-
-
-(definition (update-done)
-  (set-cursor :arrow)
-  (set-work-done? #t)
-  (update-crashes-view-color)
-  (send-crash-reports (jiri-application-crashes) #t)
-  (quit-callback))
 
 
 ;;;
