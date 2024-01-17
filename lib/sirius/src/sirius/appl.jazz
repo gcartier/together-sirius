@@ -90,7 +90,8 @@
 
 (definition protected (update-at-sirius)
   (set-first-install? (was-first-install?))
-  (setup-stage-view (string-append "Updating " (jiri-title)))
+  (setup-stage-view)
+  (set-stage-view-updating)
   (update-tasks-done)
   (let ((thread
           (new-thread
