@@ -91,7 +91,6 @@
 (definition protected (update-at-sirius)
   (set-first-install? (was-first-install?))
   (setup-stage-view (string-append "Updating " (jiri-title)))
-  (update-crashes-view-color)
   (update-tasks-done)
   (let ((thread
           (new-thread
