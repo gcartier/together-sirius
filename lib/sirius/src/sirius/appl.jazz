@@ -85,7 +85,7 @@
 
 
 (definition load-expected-from-sirius
-  865)
+  860)
 
 
 (definition (was-first-install?)
