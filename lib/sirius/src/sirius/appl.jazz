@@ -84,6 +84,10 @@
 ;;;
 
 
+(definition load-expected-from-sirius
+  865)
+
+
 (definition (was-first-install?)
   (equal? (string-argument "first-install" "yes") "yes"))
 
@@ -100,7 +104,7 @@
                 (lambda ()
                   (update-app/data
                     (lambda (new-content?)
-                      (launch-app "together" new-content?
+                      (launch-app "together" new-content? load-expected-from-sirius
                         (lambda ()
                           (quit-callback))))))))
             'update)))
