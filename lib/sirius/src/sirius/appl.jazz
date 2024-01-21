@@ -127,9 +127,9 @@
          (set-window-v (integer-argument "window-v" -1))
          (set-send-ready? (boolean-argument "send-ready" #f)))
         (else
-         (system-message "It is incorrect to launch this application"
+         (system-message "Please use the round icon to launch Together"
                          type: 'problem
-                         title: "Update")
+                         title: "Together")
          (exit 1))))
 
 
