@@ -4,7 +4,7 @@
   (products (sirius (title "Sirius")
                     (run sirius.run)
                     (product sirius.product)
-                    (build (sirius executable: "Sirius" bundle: "sirius" resources: "resources"))
+                    (build (sirius executable: "Sirius" bundle: "sirius" resources: "resources/sirius"))
                     (update sirius.appl
                             sirius.product
                             sirius.run)
