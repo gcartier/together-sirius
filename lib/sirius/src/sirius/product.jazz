@@ -106,8 +106,7 @@
            name: installation-dirname
            bundle: "sirius"
            source-access?: kernel-source-accessible?
-           platform?: #t
-           opengl?: #t)))))
+           platform?: #t)))))
   (windows
    (definition install-dir
      {Directory Home "together" "install"})
@@ -134,7 +133,6 @@
           source-access?: kernel-source-accessible?
           scriptable?: #f
           platform?: #t
-          opengl?: #t
           files: '("Sirius.exe" "curl.exe"))))))
   (else
    (definition install-dir
@@ -162,7 +160,6 @@
           source-access?: kernel-source-accessible?
           scriptable?: #f
           platform?: #t
-          opengl?: #t
           files: '("Sirius" "curl.exe")))))))
 
 

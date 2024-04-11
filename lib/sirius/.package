@@ -8,6 +8,7 @@
                     (update sirius.appl
                             sirius.product
                             sirius.run)
-                    (dependencies jiri
+                    (dependencies jazz.product
+                                  jiri
                                   update)))
   (project ".project"))
