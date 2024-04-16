@@ -68,25 +68,19 @@
   860)
 
 
-(definition (was-first-install?)
-  (equal? (string-argument "first-install" "yes") "yes"))
-
-
 (definition protected (update-at-sirius)
   (current-root-dir (string-argument "root-dir" #f))
   (called-from (string-argument "called-from" #f))
   (cond ((and (current-root-dir)
               (equal? (called-from) "together"))
-         (set-work-downloaded (integer-argument "work-downloaded" 0))
-         (set-window-h (integer-argument "window-h" -1))
-         (set-window-v (integer-argument "window-v" -1)))
+         (set-first-install? (equal? (string-argument "first-install" "yes") "yes"))
+         (set-work-downloaded (integer-argument "work-downloaded" 0)))
         (else
          @splashoo
          (system-message "Please use the round icon to launch Together"
                          type: 'problem
                          title: "Together")
          (exit 1)))
-  (set-first-install? (was-first-install?))
   (setup-stage-view)
   (set-stage-view-updating)
   (update-tasks-done)
