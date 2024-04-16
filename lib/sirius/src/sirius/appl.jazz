@@ -99,14 +99,4 @@
             (lambda ()
               (exit)
               @splashoo
-              (quit-callback))))))))
-
-
-;;;
-;;;; Init
-;;;
-
-
-(set-jiri-init
-  (lambda ()
-    (jiri-layout))))
+              (quit-callback)))))))))
