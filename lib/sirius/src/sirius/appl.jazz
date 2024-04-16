@@ -28,7 +28,6 @@
         (jiri.structure)
         (jiri.update)
         (jiri.view)
-        (jiri.window)
         (jiri.work))
 
 
