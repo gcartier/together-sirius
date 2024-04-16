@@ -52,23 +52,9 @@
   (jiri-prepare)
   (jiri-finish)
   
-  (applInit)
-  (splashInit)
-  
-  (let ((thread
-          (new-thread
-            (lambda ()
-              (declare (proper-tail-calls))
-              (let (loop)
-                (poll-events)
-                (sleep .01)
-                (if splash-done?
-                    (splashTerminate)
-                  (loop))))
-            'event)))
-    (set! splash-thread thread)
-    (set! splash-done? #f)
-    (thread-start! thread))
+  (appl-init)
+  (splash-init)
+  (splash-start)
   
   (update-at-sirius))
 
