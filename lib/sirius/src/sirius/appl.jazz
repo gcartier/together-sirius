@@ -51,6 +51,7 @@
   
   (jiri-prepare)
   (jiri-finish)
+  (jiri-ready)
   
   (appl-init)
   (splash-init)
@@ -79,8 +80,7 @@
               (equal? (called-from) "together"))
          (set-work-downloaded (integer-argument "work-downloaded" 0))
          (set-window-h (integer-argument "window-h" -1))
-         (set-window-v (integer-argument "window-v" -1))
-         (set-send-ready? (boolean-argument "send-ready" #f)))
+         (set-window-v (integer-argument "window-v" -1)))
         (else
          @splashoo
          (system-message "Please use the round icon to launch Together"
