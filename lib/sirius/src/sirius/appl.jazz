@@ -76,11 +76,13 @@
          (set-first-install? (equal? (string-argument "first-install" "yes") "yes"))
          (set-work-downloaded (integer-argument "work-downloaded" 0)))
         (else
-         @splashoo
-         (system-message "Please use the round icon to launch Together"
-                         type: 'problem
-                         title: "Together")
-         (exit 1)))
+         (splash-event
+           (lambda ()
+             (system-message "Please use the round icon to launch Together"
+                             type: 'problem
+                             title: "Together")
+             (exit 1)))
+         (sleep +inf.0)))
   (setup-stage-view)
   (set-stage-view-updating)
   (update-tasks-done)
@@ -90,6 +92,4 @@
         (lambda (new-content?)
           (launch-app "together" new-content? load-expected-from-sirius
             (lambda ()
-              (exit)
-              @splashoo
-              (quit-callback)))))))))
+              (exit)))))))))
