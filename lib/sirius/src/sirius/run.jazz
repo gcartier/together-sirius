@@ -16,14 +16,13 @@
 (module sirius.run jazz
 
 
-(import (jiri.update)
+(import (jazz.appl)
+        (jiri.update)
         (update.settings)
         (sirius.appl))
 
 
 (definition (already-running?)
-  #f
-  @splashoo
   (if (cond-expand
         (devel #f)
         (else (process-already-running?)))
