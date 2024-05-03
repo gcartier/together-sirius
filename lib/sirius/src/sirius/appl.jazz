@@ -17,6 +17,7 @@
 
 
 (import (jazz.appl)
+        (jazz.associative)
         (jazz.io)
         (jazz.settings)
         (jazz.splash)
@@ -47,6 +48,8 @@
   (initialize-aliases)
   
   (register-resources-alias 'Sirius)
+  
+  (fix-jas-settings)
   
   (jiri-prepare)
   (jiri-finish)
