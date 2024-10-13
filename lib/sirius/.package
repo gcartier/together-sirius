@@ -10,5 +10,7 @@
                             sirius.run)
                     (dependencies jazz.product
                                   jiri
-                                  update)))
+                                  update
+                                  (cond
+                                    (silicon jazz.openssl)))))
   (project ".project"))
