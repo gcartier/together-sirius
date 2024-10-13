@@ -5,15 +5,15 @@
 	<key>CFBundleExecutable</key>
 	<string>Sirius</string>
 	<key>CFBundleGetInfoString</key>
-	<string>Update</string>
+	<string>TogetherUpdate</string>
 	<key>CFBundleIconFile</key>
 	<string>sirius.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.togethersphere.TogetherTestSirius</string>
+	<string>com.togethersphere.TogetherLiveSirius</string>
 	<key>CFBundleName</key>
-	<string>Update</string>
+	<string>TogetherUpdate</string>
 	<key>CFBundleDisplayName</key>
-	<string>Update</string>
+	<string>TogetherUpdate</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>NSHighResolutionCapable</key>
