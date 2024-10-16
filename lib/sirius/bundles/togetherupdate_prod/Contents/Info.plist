@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleExecutable</key>
-	<string>Sirius</string>
+	<string>TogetherUpdate</string>
 	<key>CFBundleGetInfoString</key>
 	<string>TogetherUpdate</string>
 	<key>CFBundleIconFile</key>
-	<string>sirius.icns</string>
+	<string>togetherupdate.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.togethersphere.TogetherSirius</string>
+	<string>com.togethersphere.TogetherUpdate</string>
 	<key>CFBundleName</key>
 	<string>TogetherUpdate</string>
 	<key>CFBundleDisplayName</key>
