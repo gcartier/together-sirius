@@ -81,7 +81,7 @@
         (else
          (splash-event
            (lambda ()
-             (system-message "Please use the round icon to launch Together"
+             (system-message (format "Please use the round icon{%}to launch Together")
                              type: 'problem
                              title: "Together")
              (exit 1)))
